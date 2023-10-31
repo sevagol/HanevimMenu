@@ -15,7 +15,7 @@ const App = () => {
       <Container>
         <Grid container spacing={3} alignItems="stretch">
           {menuItems.map((item, index) => (
-            <Grid item xs={12} sm={6} key={index}>
+            <Grid item xs={12} sm={3} key={index}>
               <MenuItem {...item} />
             </Grid>
           ))}
