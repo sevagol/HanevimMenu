@@ -18,7 +18,7 @@ const MenuItem: FC<ItemProps> = ({ title, price, imgUrl }) => {
   const handleDecrease = () => setCount(count > 0 ? count - 1 : 0);
 
   return (
-    <Card sx={{ width: 200, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <Card sx={{ width: 200, height: 300, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <CardMedia
         component="img"
         height="140"
