@@ -1,10 +1,10 @@
-import MenuItem from './MenuItem';
-import { Container, Grid } from '@mui/material';
 import Cup from './assets/cofffee-cup.svg';
 import Pancake from './assets/pancakes.svg';
-import './App.css';
+import MenuItem from './MenuItem';
+import { Container, Grid, useTheme, useMediaQuery } from '@mui/material';
 
 const App = () => {
+
   const menuItems = [
     { title: 'Coffee', price: 10.99, imgUrl: Cup},
     { title: 'Pancake', price: 7.99, imgUrl: Pancake },
@@ -15,7 +15,7 @@ const App = () => {
     <Container>
       <Grid container spacing={3}>
         {menuItems.map((item, index) => (
-          <Grid item key={index}>
+          <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
             <MenuItem {...item} />
           </Grid>
         ))}
