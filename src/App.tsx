@@ -2,13 +2,14 @@ import MenuItem from './MenuItem';
 import { Container, Grid } from '@mui/material';
 import Cup from './assets/cofffee-cup.svg'
 import Pancake from './assets/pancakes.svg'
+import Tea from './assets/tea.svg'
 import './App.css';
 
 const App = () => {
   const menuItems = [
     { title: 'Coffee', price: 10.99, imgUrl: Cup},
     { title: 'Pancake', price: 7.99, imgUrl: Pancake },
-    // ... другие позиции меню
+    { title: 'Tea', price: 3.99, imgUrl: Tea},
   ];
 
   return (
