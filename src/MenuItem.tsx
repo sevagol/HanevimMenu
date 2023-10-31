@@ -19,7 +19,7 @@ const MenuItem: FC<ItemProps> = ({ title, price, imgUrl }) => {
 
     return (
         <Card sx={{
-            width: '100%',
+            width: '30%',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
