@@ -1,8 +1,8 @@
+
 import MenuItem from './MenuItem';
-import { Container, Grid } from '@mui/material';
-import Cup from './assets/cofffee-cup.svg'
-import Pancake from './assets/pancakes.svg'
-import Tea from './assets/tea.svg'
+import Cup from './assets/cofffee-cup.svg';
+import Pancake from './assets/pancakes.svg';
+import Tea from './assets/tea.svg';
 import './App.css';
 
 const App = () => {
@@ -13,15 +13,11 @@ const App = () => {
   ];
 
   return (
-    <Container>
-      <Grid container className="grid-container">
-        {menuItems.map((item, index) => (
-          <Grid spacing={8} className="card" item xs={4} key={index}>
-            <MenuItem {...item} />
-          </Grid>
-        ))}
-      </Grid>
-    </Container>
+    <div className="menu-container">
+      {menuItems.map((item, index) => (
+        <MenuItem {...item} key={index} />
+      ))}
+    </div>
   );
 };
 

@@ -30,3 +30,9 @@ body {
     width: calc(100% - var(--spacing-unit));
   }
 }
+
+.menu-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+}
