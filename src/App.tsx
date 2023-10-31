@@ -1,7 +1,7 @@
 import Cup from './assets/cofffee-cup.svg';
 import Pancake from './assets/pancakes.svg';
 import MenuItem from './MenuItem';
-import { Container, Grid, useTheme, useMediaQuery } from '@mui/material';
+import { Container, Grid} from '@mui/material';
 
 const App = () => {
 
