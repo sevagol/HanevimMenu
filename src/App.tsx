@@ -1,5 +1,6 @@
 import MenuItem from './MenuItem';
 import { Container, Grid } from '@mui/material';
+import './App.css';
 
 const App = () => {
   const menuItems = [
@@ -10,9 +11,9 @@ const App = () => {
 
   return (
     <Container>
-      <Grid container spacing={3}>
+      <Grid container spacing={3} className="grid-container">
         {menuItems.map((item, index) => (
-          <Grid item xs={4} key={index}>
+          <Grid className="card" item xs={4} key={index}>
             <MenuItem {...item} />
           </Grid>
         ))}
