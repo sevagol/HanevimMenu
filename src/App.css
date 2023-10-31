@@ -1,5 +1,9 @@
 :root {
-  --spacing-unit: 8px;
+  --spacing-unit: 16px;
+}
+
+body {
+  background-color: #282c34; /* Измените на цвет, который вы предпочитаете */
 }
 
 .grid-container {
@@ -9,18 +13,10 @@
 }
 
 .card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-sizing: border-box;
-  min-width: 0;
-  word-wrap: break-word;
-  background-clip: border-box;
-  border-radius: 4px;
-  overflow: hidden;
-  margin-bottom: var(--spacing-unit);
   width: calc(33.333% - var(--spacing-unit));
-  min-height: 15em; 
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 @media screen and (max-width: 768px) {
