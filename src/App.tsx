@@ -13,7 +13,7 @@ const App = () => {
 
   return (
     <Container>
-      <Grid container spacing={3} className="grid-container">
+      <Grid container spacing={5} className="grid-container">
         {menuItems.map((item, index) => (
           <Grid className="card" item xs={4} key={index}>
             <MenuItem {...item} />
