@@ -1,41 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import twaLogo from './assets/tapps.png'
-import viteLogo from '/vite.svg'
-import './App.css'
+import MenuItem from './MenuItem';
+import { Container, Grid } from '@mui/material';
+import Cup from './assets/cofffee-cup.svg';
+import Pancake from './assets/pancakes.svg';
+import './App.css';
 
-import WebApp from '@twa-dev/sdk'
-
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const menuItems = [
+    { title: 'Coffee', price: 10.99, imgUrl: Cup},
+    { title: 'Pancake', price: 7.99, imgUrl: Pancake },
+    // ... другие позиции меню
+  ];
 
   return (
-    <>
-      <div>
-        <a href="https://ton.org/dev" target="_blank">
-          <img src={twaLogo} className="logo" alt="TWA logo" />
-        </a>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>TWA + Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-      </div>
-      {/*  */}
-      <div className="card">
-        <button onClick={() => WebApp.showAlert(`Hello World! Current count is ${count}`)}>
-            Show Alert
-        </button>
-      </div>
-    </>
-  )
-}
+    <Container>
+      <Grid container spacing={3}>
+        {menuItems.map((item, index) => (
+          <Grid item key={index}>
+            <MenuItem {...item} />
+          </Grid>
+        ))}
+      </Grid>
+    </Container>
+  );
+};
 
-export default App
+export default App;
