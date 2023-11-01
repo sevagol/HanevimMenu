@@ -39,7 +39,8 @@ const MenuItem: FC<ItemProps> = ({ title, price, imgUrl }) => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 backgroundColor: 'transparent',
-                boxShadow: 'none'
+                boxShadow: 'none',
+                p:1
             }}>
                 <Typography gutterBottom variant="h6" component="div" sx={{ color: 'white' }}>
                     {title}
@@ -61,7 +62,7 @@ const MenuItem: FC<ItemProps> = ({ title, price, imgUrl }) => {
                             <Typography variant="h6" color="white">{count}</Typography>
                         </Grid>
                         <Grid item>
-                            <IconButton color="primary" onClick={handleIncrease}>
+                            <IconButton size="small" color="primary" onClick={handleIncrease}>
                                 <AddCircleOutlineIcon />
                             </IconButton>
                         </Grid>
