@@ -8,6 +8,7 @@ import WebApp from '@twa-dev/sdk';
 
 
 const App = () => {
+  WebApp.setBackgroundColor("#000000")
   const [addedItemsCount, setAddedItemsCount] = useState(0);
 
   const menuItems = [
