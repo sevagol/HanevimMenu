@@ -50,3 +50,20 @@ body {
     font-size: 10px;
   }
 }
+
+.card {
+  transform: scale(0.9); /* Уменьшение на 10% */
+}
+
+@media screen and (max-width: 768px) {
+  .card {
+    transform: scale(0.8); /* Уменьшение на 20% для экранов меньше 768px */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .card {
+    transform: scale(0.7); /* Уменьшение на 30% для экранов меньше 480px */
+  }
+}
+
