@@ -1,7 +1,8 @@
 import { FC, useState } from 'react';
 import { Card, CardContent, CardMedia, Typography, Button, Grid, IconButton, Box } from '@mui/material';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
+
 
 interface ItemProps {
     title: string;
@@ -72,16 +73,27 @@ const MenuItem: FC<ItemProps> = ({ title, price, imgUrl, onAddChange }) => {
                 ) : (
                     <Grid container spacing={1} alignItems="center" justifyContent="center" sx={{ mt: 2 }}>
                         <Grid item>
-                            <IconButton size="small" color="primary" onClick={handleDecrease}>
-                                <RemoveCircleOutlineIcon fontSize="small" />
+                            <IconButton size="small" onClick={handleDecrease}
+                                sx={{
+                                    backgroundColor: 'orange',
+                                    borderRadius: '4px',
+                                    '&:hover': { backgroundColor: 'darkorange' }
+                                }}>
+                                <RemoveIcon style={{ color: 'white' }} />
                             </IconButton>
                         </Grid>
                         <Grid item>
-                            <IconButton size="small" color="primary" onClick={handleIncrease}>
-                                <AddCircleOutlineIcon />
+                            <IconButton size="small" onClick={handleIncrease}
+                                sx={{
+                                    backgroundColor: 'green',
+                                    borderRadius: '4px',
+                                    '&:hover': { backgroundColor: 'darkgreen' }
+                                }}>
+                                <AddIcon style={{ color: 'white' }} />
                             </IconButton>
                         </Grid>
                     </Grid>
+
                 )}
             </CardContent>
         </Card>
