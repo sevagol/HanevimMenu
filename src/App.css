@@ -3,7 +3,7 @@
 }
 
 body {
-  background-color: #282c34; /* Измените на цвет, который вы предпочитаете */
+  background-color: #282c34;
 }
 
 .grid-container {
@@ -35,4 +35,18 @@ body {
   display: flex;
   justify-content: space-between;
   padding: 16px;
+}
+
+/* Новые стили для кнопок плюса и минуса */
+.icon-button {
+  padding: 4px; /* Уменьшите внутренние отступы */
+  font-size: 12px; /* Уменьшите размер шрифта, если используется текст */
+}
+
+/* Можно также добавить медиа-запросы для дополнительной настройки */
+@media screen and (max-width: 480px) {
+  .icon-button {
+    padding: 2px;
+    font-size: 10px;
+  }
 }
