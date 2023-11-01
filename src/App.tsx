@@ -1,15 +1,17 @@
 import { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Switch, useHistory } from 'react-router-dom';
 import MenuItem from './MenuItem';
+import OrdersList from './OrdersList'; // Импортируйте новый компонент
 import Cup from './assets/cofffee-cup.svg';
 import Pancake from './assets/pancakes.svg';
 import Tea from './assets/tea.svg';
 import './App.css';
 import WebApp from '@twa-dev/sdk';
 
-
 const App = () => {
-  WebApp.setBackgroundColor("#000000")
+  WebApp.setBackgroundColor("#000000");
   const [addedItemsCount, setAddedItemsCount] = useState(0);
+  const history = useHistory();
 
   const menuItems = [
     { title: 'Coffee', price: 10.99, imgUrl: Cup },
@@ -25,19 +27,31 @@ const App = () => {
     const mainbutton = WebApp.MainButton;
 
     if (addedItemsCount > 0) {
-      mainbutton.setText("VIEW ORDER")
+      mainbutton.setText("VIEW ORDER");
       mainbutton.show();
+      mainbutton.onClick(() => {
+        history.push("/orders"); // переход на страницу заказов
+      });
     } else {
       mainbutton.hide();
     }
-  }, [addedItemsCount]);
+  }, [addedItemsCount, history]);
 
   return (
-    <div className="menu-container">
-      {menuItems.map((item, index) => (
-        <MenuItem {...item} key={index} onAddChange={handleAddChange} />
-      ))}
-    </div>
+    <Router>
+      <Switch>
+        <Route path="/orders">
+          <OrdersList /* передайте сюда ваш список заказов, например orders={orders} */ />
+        </Route>
+        <Route path="/">
+          <div className="menu-container">
+            {menuItems.map((item, index) => (
+              <MenuItem {...item} key={index} onAddChange={handleAddChange} />
+            ))}
+          </div>
+        </Route>
+      </Switch>
+    </Router>
   );
 };
 
