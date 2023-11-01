@@ -62,16 +62,16 @@ const MenuItem: FC<ItemProps> = ({ title, price, imgUrl }) => {
                     <Button variant="contained" onClick={handleAddClick} sx={{ mt: 2 }}>Add</Button>
                 ) : (
                     <Grid container spacing={1} alignItems="center" justifyContent="center" sx={{ mt: 2 }}>
+                        {count > 0 && (
+                            <Grid item xs={12} container justifyContent="center">
+                                <Typography variant="h6" color="white">{count}</Typography>
+                            </Grid>
+                        )}
                         <Grid item>
                             <IconButton size="small" color="primary" onClick={handleDecrease}>
                                 <RemoveCircleOutlineIcon fontSize="small" />
                             </IconButton>
                         </Grid>
-                        {count > 0 && (
-                            <Grid item>
-                                <Typography variant="h6" color="white">{count}</Typography>
-                            </Grid>
-                        )}
                         <Grid item>
                             <IconButton size="small" color="primary" onClick={handleIncrease}>
                                 <AddCircleOutlineIcon />
