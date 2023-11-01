@@ -29,7 +29,7 @@ const MenuItem: FC<ItemProps> = ({ title, price, imgUrl }) => {
         }}>
             <CardMedia
                 component="img"
-                sx={{ width: '100%', borderRadius: '4px' }}
+                sx={{ width: '80%', borderRadius: '4px' }}
                 image={imgUrl}
                 alt={title}
             />
