@@ -40,7 +40,7 @@ const MenuItem: FC<ItemProps> = ({ title, price, imgUrl }) => {
                 alignItems: 'center',
                 backgroundColor: 'transparent',
                 boxShadow: 'none',
-                p:1
+                p: 1
             }}>
                 <Typography gutterBottom variant="h6" component="div" sx={{ color: 'white' }}>
                     {title}
@@ -53,17 +53,18 @@ const MenuItem: FC<ItemProps> = ({ title, price, imgUrl }) => {
                 ) : (
                     <Grid container spacing={1} alignItems="center" justifyContent="center" sx={{ mt: 2 }}>
                         <Grid item>
-                            <IconButton size="small" color="primary" onClick={handleDecrease}>
+                            <IconButton size="small" color="primary" onClick={handleDecrease} sx={{ width: '36px', height: '36px' }}>
                                 <RemoveCircleOutlineIcon fontSize="small" />
                             </IconButton>
+
 
                         </Grid>
                         <Grid item>
                             <Typography variant="h6" color="white">{count}</Typography>
                         </Grid>
                         <Grid item>
-                            <IconButton size="small" color="primary" onClick={handleIncrease}>
-                                <AddCircleOutlineIcon />
+                            <IconButton size="small" color="primary" onClick={handleIncrease} sx={{ width: '36px', height: '36px' }}>
+                                <AddCircleOutlineIcon fontSize="small" />
                             </IconButton>
                         </Grid>
                     </Grid>
