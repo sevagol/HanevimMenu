@@ -19,7 +19,8 @@ const MenuItem: FC<ItemProps> = ({ title, price, imgUrl }) => {
 
     return (
         <Card sx={{
-            width: '20%',
+            position: 'relative',
+            width: '30%',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -27,6 +28,17 @@ const MenuItem: FC<ItemProps> = ({ title, price, imgUrl }) => {
             boxShadow: 'none',
             overflow: 'visible'
         }}>
+            <Typography variant="h6" color="white" sx={{
+                position: 'absolute',
+                top: '5%',
+                right: '5%',
+                backgroundColor: 'rgba(0,0,0,0.5)',
+                borderRadius: '50%',
+                padding: '0.5em',
+                display: isAdding ? 'flex' : 'none'
+            }}>
+                {count}
+            </Typography>
             <CardMedia
                 component="img"
                 sx={{ width: '80%', borderRadius: '4px' }}
@@ -40,7 +52,7 @@ const MenuItem: FC<ItemProps> = ({ title, price, imgUrl }) => {
                 alignItems: 'center',
                 backgroundColor: 'transparent',
                 boxShadow: 'none',
-                p: 1
+                p:1
             }}>
                 <Typography gutterBottom variant="h6" component="div" sx={{ color: 'white' }}>
                     {title}
@@ -52,18 +64,16 @@ const MenuItem: FC<ItemProps> = ({ title, price, imgUrl }) => {
                     <Button variant="contained" onClick={handleAddClick} sx={{ mt: 2 }}>Add</Button>
                 ) : (
                     <Grid container spacing={1} alignItems="center" justifyContent="center" sx={{ mt: 2 }}>
-                        <Grid item sx={{ width: '20px' }}>
-                            <IconButton size="small" color="primary" onClick={handleDecrease} sx={{ width: '36px', height: '36px' }}>
+                        <Grid item>
+                            <IconButton size="small" color="primary" onClick={handleDecrease}>
                                 <RemoveCircleOutlineIcon fontSize="small" />
                             </IconButton>
-
-
                         </Grid>
-                        <Grid item>
+                        <Grid item sx={{ display: 'none' }}> {/* Скрываем счетчик в этом месте */}
                             <Typography variant="h6" color="white">{count}</Typography>
                         </Grid>
-                        <Grid item sx={{ width: '20px' }}>
-                            <IconButton size="small" color="primary" onClick={handleIncrease} sx={{ width: '36px', height: '36px' }}>
+                        <Grid item>
+                            <IconButton size="small" color="primary" onClick={handleIncrease}>
                                 <AddCircleOutlineIcon fontSize="small" />
                             </IconButton>
                         </Grid>
