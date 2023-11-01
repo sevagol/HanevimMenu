@@ -13,13 +13,22 @@ const MenuItem: FC<ItemProps> = ({ title, price, imgUrl }) => {
     const [count, setCount] = useState(0);
     const [isAdding, setIsAdding] = useState(false);
 
-    const handleAddClick = () => setIsAdding(true);
+    const handleAddClick = () => {
+        setIsAdding(true);
+        setCount(1);
+    };
     const handleIncrease = () => setCount(count + 1);
-    const handleDecrease = () => setCount(count > 0 ? count - 1 : 0);
+    const handleDecrease = () => {
+        if (count === 1) {
+            setIsAdding(false);
+            setCount(0);
+        } else {
+            setCount(count - 1);
+        }
+    };
 
     return (
         <Card sx={{
-            position: 'relative',
             width: '30%',
             display: 'flex',
             flexDirection: 'column',
@@ -28,17 +37,6 @@ const MenuItem: FC<ItemProps> = ({ title, price, imgUrl }) => {
             boxShadow: 'none',
             overflow: 'visible'
         }}>
-            <Typography variant="h6" color="white" sx={{
-                position: 'absolute',
-                top: '5%',
-                right: '5%',
-                backgroundColor: 'rgba(0,0,0,0.5)',
-                borderRadius: '50%',
-                padding: '0.5em',
-                display: isAdding ? 'flex' : 'none'
-            }}>
-                {count}
-            </Typography>
             <CardMedia
                 component="img"
                 sx={{ width: '80%', borderRadius: '4px' }}
@@ -52,7 +50,7 @@ const MenuItem: FC<ItemProps> = ({ title, price, imgUrl }) => {
                 alignItems: 'center',
                 backgroundColor: 'transparent',
                 boxShadow: 'none',
-                p:1
+                p: 1
             }}>
                 <Typography gutterBottom variant="h6" component="div" sx={{ color: 'white' }}>
                     {title}
@@ -69,12 +67,14 @@ const MenuItem: FC<ItemProps> = ({ title, price, imgUrl }) => {
                                 <RemoveCircleOutlineIcon fontSize="small" />
                             </IconButton>
                         </Grid>
-                        <Grid item sx={{ display: 'none' }}> {/* Скрываем счетчик в этом месте */}
-                            <Typography variant="h6" color="white">{count}</Typography>
-                        </Grid>
+                        {count > 0 && (
+                            <Grid item>
+                                <Typography variant="h6" color="white">{count}</Typography>
+                            </Grid>
+                        )}
                         <Grid item>
                             <IconButton size="small" color="primary" onClick={handleIncrease}>
-                                <AddCircleOutlineIcon fontSize="small" />
+                                <AddCircleOutlineIcon />
                             </IconButton>
                         </Grid>
                     </Grid>
