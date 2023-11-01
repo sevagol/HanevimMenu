@@ -7,15 +7,17 @@ interface ItemProps {
     title: string;
     price: number;
     imgUrl: string;
+    onAddChange: (isAdded: boolean) => void;
 }
 
-const MenuItem: FC<ItemProps> = ({ title, price, imgUrl }) => {
+const MenuItem: FC<ItemProps> = ({ title, price, imgUrl, onAddChange }) => {
     const [count, setCount] = useState(0);
     const [isAdding, setIsAdding] = useState(false);
 
     const handleAddClick = () => {
         setIsAdding(true);
         setCount(1);
+        onAddChange(true);
     };
     const handleIncrease = () => setCount(count + 1);
     const handleDecrease = () => {
