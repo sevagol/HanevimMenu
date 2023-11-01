@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import { Card, CardContent, CardMedia, Typography, Button, Grid, IconButton } from '@mui/material';
+import { Card, CardContent, CardMedia, Typography, Button, Grid, IconButton, Box } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 
@@ -29,6 +29,7 @@ const MenuItem: FC<ItemProps> = ({ title, price, imgUrl }) => {
 
     return (
         <Card sx={{
+            position: 'relative',
             width: '30%',
             display: 'flex',
             flexDirection: 'column',
@@ -37,6 +38,11 @@ const MenuItem: FC<ItemProps> = ({ title, price, imgUrl }) => {
             boxShadow: 'none',
             overflow: 'visible'
         }}>
+            {count > 0 && (
+                <Box sx={{ position: 'absolute', top: 0, right: 0, mt: 1, mr: 1 }}>
+                    <Typography variant="h6" color="white">{count}</Typography>
+                </Box>
+            )}
             <CardMedia
                 component="img"
                 sx={{ width: '80%', borderRadius: '4px' }}
@@ -62,11 +68,6 @@ const MenuItem: FC<ItemProps> = ({ title, price, imgUrl }) => {
                     <Button variant="contained" onClick={handleAddClick} sx={{ mt: 2 }}>Add</Button>
                 ) : (
                     <Grid container spacing={1} alignItems="center" justifyContent="center" sx={{ mt: 2 }}>
-                        {count > 0 && (
-                            <Grid item xs={12} container justifyContent="center">
-                                <Typography variant="h6" color="white">{count}</Typography>
-                            </Grid>
-                        )}
                         <Grid item>
                             <IconButton size="small" color="primary" onClick={handleDecrease}>
                                 <RemoveCircleOutlineIcon fontSize="small" />
