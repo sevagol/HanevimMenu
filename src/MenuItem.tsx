@@ -24,6 +24,7 @@ const MenuItem: FC<ItemProps> = ({ title, price, imgUrl, onAddChange }) => {
         if (count === 1) {
             setIsAdding(false);
             setCount(0);
+            onAddChange(false);
         } else {
             setCount(count - 1);
         }
