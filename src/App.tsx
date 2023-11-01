@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import MenuItem from './MenuItem';
-import OrdersList from './OrderList'; 
+import OrderList from './OrderList'; 
 import Cup from './assets/cofffee-cup.svg';
 import Pancake from './assets/pancakes.svg';
 import Tea from './assets/tea.svg';
@@ -41,7 +41,7 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/orders" element={<OrdersList /* передайте сюда ваш список заказов, например orders={orders} */ />} />
+        <Route path="/orders" element={<OrderList /* передайте сюда ваш список заказов, например orders={orders} */ />} />
         <Route path="/" element={
           <div className="menu-container">
             {menuItems.map((item, index) => (

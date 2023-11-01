@@ -4,7 +4,7 @@ interface OrdersListProps {
     orders: Array<{ title: string; count: number; }>
 }
 
-const OrdersList: FC<OrdersListProps> = ({ orders }) => {
+const OrderList: FC<OrdersListProps> = ({ orders }) => {
     return (
         <div>
             <h1>Your Orders</h1>
@@ -17,4 +17,4 @@ const OrdersList: FC<OrdersListProps> = ({ orders }) => {
     );
 };
 
-export default OrdersList;
+export default OrderList;
