@@ -52,7 +52,7 @@ const MenuItem: FC<ItemProps> = ({ title, price, imgUrl }) => {
                     <Button variant="contained" onClick={handleAddClick} sx={{ mt: 2 }}>Add</Button>
                 ) : (
                     <Grid container spacing={1} alignItems="center" justifyContent="center" sx={{ mt: 2 }}>
-                        <Grid item sx={{ width: '10px' }}>
+                        <Grid item sx={{ width: '20px' }}>
                             <IconButton size="small" color="primary" onClick={handleDecrease} sx={{ width: '36px', height: '36px' }}>
                                 <RemoveCircleOutlineIcon fontSize="small" />
                             </IconButton>
@@ -62,7 +62,7 @@ const MenuItem: FC<ItemProps> = ({ title, price, imgUrl }) => {
                         <Grid item>
                             <Typography variant="h6" color="white">{count}</Typography>
                         </Grid>
-                        <Grid item sx={{ width: '10px' }}>
+                        <Grid item sx={{ width: '20px' }}>
                             <IconButton size="small" color="primary" onClick={handleIncrease} sx={{ width: '36px', height: '36px' }}>
                                 <AddCircleOutlineIcon fontSize="small" />
                             </IconButton>
