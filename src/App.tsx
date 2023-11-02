@@ -96,7 +96,7 @@ const App = () => {
                     <div className="menu-container">
                         <Grid container spacing={3}>
                         {menuItems.map((item, index) => (
-                            <Grid item xs={12} sm={6} md={4} key={index}>
+                            <Grid item xs={4} sm={4} md={4} key={index}>
                             <MenuItem {...item} key={index} onAddChange={handleAddChange} />
                             </Grid>
                         ))}
