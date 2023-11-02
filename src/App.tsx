@@ -5,6 +5,15 @@ import OrdersList from './OrdersList';
 import Cup from './assets/cofffee-cup.svg';
 import Pancake from './assets/pancakes.svg';
 import Tea from './assets/tea.svg';
+import Cappucino from './assets/cappucino.svg';
+import Cortado from './assets/cortado.svg';
+import Espresso from './assets/espresso.svg';
+import FlatWhite from './assets/flatv.svg';
+import Latte from './assets/latte.svg';
+import filter from './assets/filter.svg';
+import Juice from './assets/juice.svg';
+import Matcha from './assets/matcha.svg';
+import V60 from './assets/v60.svg';
 import './App.css';
 import WebApp from '@twa-dev/sdk';
 
@@ -35,6 +44,15 @@ const App = () => {
         { title: 'Coffee', price: 10.99, imgUrl: Cup },
         { title: 'Pancake', price: 7.99, imgUrl: Pancake },
         { title: 'Tea', price: 3.99, imgUrl: Tea },
+        { title: 'Cappucino', price: 4.99, imgUrl: Cappucino },
+        { title: 'Cortado', price: 5.99, imgUrl: Cortado },
+        { title: 'Espresso', price: 2.99, imgUrl: Espresso },
+        { title: 'Flat White', price: 4.99, imgUrl: FlatWhite },
+        { title: 'Latte', price: 4.99, imgUrl: Latte },
+        { title: 'Filter', price: 4.99, imgUrl: filter },
+        { title: 'Juice', price: 4.99, imgUrl: Juice },
+        { title: 'Matcha', price: 4.99, imgUrl: Matcha },
+        { title: 'V60', price: 4.99, imgUrl: V60 },
     ];
 
     const handleAddChange = (title: string, isAdded: boolean) => {
