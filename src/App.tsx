@@ -18,6 +18,7 @@ const MainButtonLogic: React.FC<{ addedItemsCount: number }> = ({ addedItemsCoun
             mainbutton.show();
             mainbutton.onClick(() => {
                 navigate("/orders");
+                mainbutton.setText("ORDER NOW");
             });
         } else {
             mainbutton.hide();
