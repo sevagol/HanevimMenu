@@ -2,9 +2,6 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 import MenuItem from './MenuItem';
 import OrdersList from './OrdersList';
-import Cup from './assets/cofffee-cup.svg';
-import Pancake from './assets/pancakes.svg';
-import Tea from './assets/tea.svg';
 import Cappucino from './assets/cappucino.svg';
 import Cortado from './assets/cortado.svg';
 import Espresso from './assets/espresso.svg';
@@ -42,9 +39,6 @@ const App = () => {
     const [orders, setOrders] = useState<{ title: string; count: number; price: number }[]>([]);
     
     const menuItems = [
-        { title: 'Coffee', price: 10.99, imgUrl: Cup },
-        { title: 'Pancake', price: 7.99, imgUrl: Pancake },
-        { title: 'Tea', price: 3.99, imgUrl: Tea },
         { title: 'Cappucino', price: 4.99, imgUrl: Cappucino },
         { title: 'Cortado', price: 5.99, imgUrl: Cortado },
         { title: 'Espresso', price: 2.99, imgUrl: Espresso },
