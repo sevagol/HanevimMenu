@@ -59,7 +59,7 @@ const App = () => {
   };
 
     return (
-        <Router basename="/HanevimMenu">
+        <Router>
             <MainButtonLogic addedItemsCount={addedItemsCount} />
             <Routes>
                 <Route path="/orders" element={<OrdersList orders={orders} />} />
