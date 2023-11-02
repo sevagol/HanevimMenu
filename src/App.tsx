@@ -28,7 +28,6 @@ const MainButtonLogic: React.FC<{ addedItemsCount: number }> = ({ addedItemsCoun
 };
 
 const App = () => {
-    WebApp.setBackgroundColor("#000000");
     const [addedItemsCount, setAddedItemsCount] = useState(0);
     const [orders, setOrders] = useState<{ title: string; count: number; }[]>([]);
     
