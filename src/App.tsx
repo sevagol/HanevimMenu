@@ -17,7 +17,7 @@ const MainButtonLogic: React.FC<{ addedItemsCount: number }> = ({ addedItemsCoun
             mainbutton.setText("VIEW ORDER");
             mainbutton.show();
             mainbutton.onClick(() => {
-                navigate("/orders");
+                navigate("/HanevimMenu/orders");
             });
         } else {
             mainbutton.hide();
