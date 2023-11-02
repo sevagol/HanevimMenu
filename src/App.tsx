@@ -8,12 +8,30 @@ import Tea from './assets/tea.svg';
 import './App.css';
 import WebApp from '@twa-dev/sdk';
 
+const MainButtonLogic: React.FC<{ addedItemsCount: number }> = ({ addedItemsCount }) => {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const mainbutton = WebApp.MainButton;
+        if (addedItemsCount > 0) {
+            mainbutton.setText("VIEW ORDER");
+            mainbutton.show();
+            mainbutton.onClick(() => {
+                navigate("/orders");
+            });
+        } else {
+            mainbutton.hide();
+        }
+    }, [addedItemsCount, navigate]);
+
+    return null;
+};
+
 const App = () => {
     WebApp.setBackgroundColor("#000000");
     const [addedItemsCount, setAddedItemsCount] = useState(0);
     const [orders, setOrders] = useState<{ title: string; count: number; }[]>([]);
-    const navigate = useNavigate();
-
+    
     const menuItems = [
         { title: 'Coffee', price: 10.99, imgUrl: Cup },
         { title: 'Pancake', price: 7.99, imgUrl: Pancake },
@@ -41,24 +59,12 @@ const App = () => {
         });
     };
 
-    useEffect(() => {
-        const mainbutton = WebApp.MainButton;
-        if (addedItemsCount > 0) {
-            mainbutton.setText("VIEW ORDER");
-            mainbutton.show();
-            mainbutton.onClick(() => {
-                navigate("/orders");
-            });
-        } else {
-            mainbutton.hide();
-        }
-    }, [addedItemsCount, navigate]);
-
     return (
         <Router>
+            <MainButtonLogic addedItemsCount={addedItemsCount} />
             <Routes>
-                <Route path="/orders" element={<OrdersList orders={orders} />} />
-                <Route path="/" element={
+                <Route path="/HanevimMenu/orders" element={<OrdersList orders={orders} />} />
+                <Route path="/HanevimMenu/" element={
                     <div className="menu-container">
                         {menuItems.map((item, index) => (
                             <MenuItem {...item} key={index} onAddChange={handleAddChange} />
