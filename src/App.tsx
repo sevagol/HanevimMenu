@@ -72,13 +72,8 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/orders" element={<OrderList orders={selectedItems.filter(item => item.count > 0)} />} />
-        <Route path="/" element={
-          <div className="menu-container">
-            {menuItems.map((item, index) => (
-              <MenuItem {...item} key={index} onAddChange={(isAdded) => handleAddChange(item, isAdded)} />
-            ))}
-          </div>
-        } />
+        <Route path="/" element={<div>Hello, world!</div>} />
+
       </Routes>
     </Router>
   );
