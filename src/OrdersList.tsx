@@ -1,4 +1,5 @@
 import React from 'react';
+import "./OrdersList.css";
 
 type Order = {
     title: string;
