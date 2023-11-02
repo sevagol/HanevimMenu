@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 import MenuItem from './MenuItem';
-// import OrdersList from './OrdersList';
+import OrdersList from './OrdersList';
 import Cup from './assets/cofffee-cup.svg';
 import Pancake from './assets/pancakes.svg';
 import Tea from './assets/tea.svg';
@@ -63,8 +63,7 @@ const App = () => {
         <Router>
             <MainButtonLogic addedItemsCount={addedItemsCount} />
             <Routes>
-            <Route path="/HanevimMenu/orders" element={<div>Test Orders Page</div>} />
-
+                <Route path="/HanevimMenu/orders" element={<OrdersList orders={orders} />} />
                 <Route path="/HanevimMenu/" element={
                     <div className="menu-container">
                         {menuItems.map((item, index) => (
