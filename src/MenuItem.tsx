@@ -75,9 +75,9 @@ const MenuItem: FC<ItemProps> = ({ title, price, imgUrl, onAddChange }) => {
                 backgroundColor: 'transparent',
                 boxShadow: 'none',
                 p: 1,
-                fontSize: '0.7rem',
+                mt: -1, 
             }}>
-                <Typography gutterBottom variant="h6" component="div" sx={{ color: 'white' }}>
+                <Typography gutterBottom variant="h6" component="div" sx={{ color: 'white', fontSize: '1rem' }}>
                     {title}
                 </Typography>
                 <Typography variant="body2" color="white">
