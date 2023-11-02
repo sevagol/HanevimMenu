@@ -12,16 +12,12 @@ const MainButtonLogic: React.FC<{ addedItemsCount: number }> = ({ addedItemsCoun
     const navigate = useNavigate();
 
     useEffect(() => {
-        const orderbutton = WebApp.MainButton;
-        orderbutton.setText("ORDER");
         const mainbutton = WebApp.MainButton;
         if (addedItemsCount > 0) {
             mainbutton.setText("VIEW ORDER");
             mainbutton.show();
             mainbutton.onClick(() => {
                 navigate("/orders");
-                mainbutton.hide();
-                orderbutton.show();
             });
         } else {
             mainbutton.hide();
