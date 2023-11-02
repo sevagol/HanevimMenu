@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 import MenuItem from './MenuItem';
-import OrdersList from './OrdersList';
+// import OrdersList from './OrdersList';
 import Cup from './assets/cofffee-cup.svg';
 import Pancake from './assets/pancakes.svg';
 import Tea from './assets/tea.svg';
