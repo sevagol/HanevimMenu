@@ -17,7 +17,7 @@ const MainButtonLogic: React.FC<{ addedItemsCount: number }> = ({ addedItemsCoun
             mainbutton.setText("VIEW ORDER");
             mainbutton.show();
             mainbutton.onClick(() => {
-                navigate("/HanevimMenu/orders");
+                navigate("/orders");
             });
         } else {
             mainbutton.hide();
@@ -38,32 +38,32 @@ const App = () => {
     ];
 
     const handleAddChange = (title: string, isAdded: boolean) => {
-        setAddedItemsCount((prevCount) => (isAdded ? prevCount + 1 : prevCount - 1));
-        setOrders((prevOrders) => {
-            const existingOrder = prevOrders.find(order => order.title === title);
-            if (isAdded) {
-                if (existingOrder) {
-                    return prevOrders.map(order => order.title === title ? { ...order, count: order.count + 1 } : order);
-                } else {
-                    return [...prevOrders, { title, count: 1 }];
-                }
-            } else {
-                if (existingOrder?.count === 1) {
-                    return prevOrders.filter(order => order.title !== title);
-                } else if (existingOrder) {
-                    return prevOrders.map(order => order.title === title ? { ...order, count: order.count - 1 } : order);
-                }
-                return prevOrders;
-            }
-        });
-    };
+      setAddedItemsCount((prevCount) => (isAdded ? prevCount + 1 : prevCount - 1));
+      setOrders((prevOrders) => {
+          const existingOrder = prevOrders.find(order => order.title === title);
+          if (isAdded) {
+              if (existingOrder) {
+                  return prevOrders.map(order => order.title === title ? { ...order, count: order.count + 1 } : order);
+              } else {
+                  return [...prevOrders, { title, count: 1 }];
+              }
+          } else {
+              if (existingOrder?.count === 1) {
+                  return prevOrders.filter(order => order.title !== title);
+              } else if (existingOrder) {
+                  return prevOrders.map(order => order.title === title ? { ...order, count: order.count - 1 } : order);
+              }
+              return prevOrders;
+          }
+      });
+  };
 
     return (
-        <Router>
+        <Router basename="/HanevimMenu">
             <MainButtonLogic addedItemsCount={addedItemsCount} />
             <Routes>
-                <Route path="/HanevimMenu/orders" element={<OrdersList orders={orders} />} />
-                <Route path="/HanevimMenu/" element={
+                <Route path="/orders" element={<OrdersList orders={orders} />} />
+                <Route path="/" element={
                     <div className="menu-container">
                         {menuItems.map((item, index) => (
                             <MenuItem {...item} key={index} onAddChange={handleAddChange} />
