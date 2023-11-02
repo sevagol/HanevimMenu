@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import MenuItem from './MenuItem';
 import OrdersList from './OrdersList';
 import Cappucino from './assets/cappucino.svg';
@@ -16,10 +17,15 @@ import WebApp from '@twa-dev/sdk';
 import { Grid } from '@mui/material';
 
 const MainButtonLogic: React.FC<{ addedItemsCount: number }> = ({ addedItemsCount }) => {
+    const location = useLocation();
     const navigate = useNavigate();
 
     useEffect(() => {
         const mainbutton = WebApp.MainButton;
+        if (location.pathname === "/orders") {
+            mainbutton.hide();
+            return; // Если пользователь находится на странице заказов, просто скройте кнопку и выйдите из useEffect
+        }
         if (addedItemsCount > 0) {
             mainbutton.setText("VIEW ORDER");
             mainbutton.show();
@@ -30,7 +36,7 @@ const MainButtonLogic: React.FC<{ addedItemsCount: number }> = ({ addedItemsCoun
         } else {
             mainbutton.hide();
         }
-    }, [addedItemsCount, navigate]);
+    }, [addedItemsCount, navigate, location]);
 
     return null;
 };
