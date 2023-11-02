@@ -38,8 +38,9 @@
 
 .order-options {
     margin-left: 10px;
+    margin-right: 7px;
     padding: 5px 10px;
-    background-color: #fff;
+    background-color: #d88013;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
