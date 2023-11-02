@@ -39,7 +39,8 @@ const MenuItem: FC<ItemProps> = ({ title, price, imgUrl, onAddChange }) => {
     return (
         <Card sx={{
             position: 'relative',
-            width: '30%',
+            width: '100%',       // Установите ширину на 100% контейнера
+            height: 400,         // Установите фиксированную высоту для всех карточек, например, 400px
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -47,6 +48,7 @@ const MenuItem: FC<ItemProps> = ({ title, price, imgUrl, onAddChange }) => {
             boxShadow: 'none',
             overflow: 'visible'
         }}>
+
             {count > 0 && (
                 <Box sx={{ position: 'absolute', top: 0, right: 0, mt: 1, mr: 1 }}>
                     <Typography variant="h6" color="white">{count}</Typography>
@@ -54,10 +56,16 @@ const MenuItem: FC<ItemProps> = ({ title, price, imgUrl, onAddChange }) => {
             )}
             <CardMedia
                 component="img"
-                sx={{ width: '80%', borderRadius: '4px' }}
+                sx={{
+                    width: '100%', // Задайте ширину на 100% контейнера
+                    height: 200,   // Установите фиксированную высоту, например, 200px
+                    objectFit: 'contain', // Указывает, как содержимое должно масштабироваться внутри контейнера
+                    borderRadius: '4px'
+                }}
                 image={imgUrl}
                 alt={title}
             />
+
             <CardContent sx={{
                 flexGrow: 1,
                 display: 'flex',
