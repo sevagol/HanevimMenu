@@ -16,6 +16,7 @@ import Matcha from './assets/matcha.svg';
 import V60 from './assets/v60.svg';
 import './App.css';
 import WebApp from '@twa-dev/sdk';
+import { Grid } from '@mui/material';
 
 const MainButtonLogic: React.FC<{ addedItemsCount: number }> = ({ addedItemsCount }) => {
     const navigate = useNavigate();
@@ -93,9 +94,13 @@ const App = () => {
                 <Route path="/orders" element={<OrdersList orders={orders} />} />
                 <Route path="/" element={
                     <div className="menu-container">
+                        <Grid container spacing={3}>
                         {menuItems.map((item, index) => (
+                            <Grid item xs={12} sm={6} md={4} key={index}>
                             <MenuItem {...item} key={index} onAddChange={handleAddChange} />
+                            </Grid>
                         ))}
+                        </Grid>
                     </div>
                 } />
             </Routes>
