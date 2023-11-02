@@ -1,5 +1,6 @@
 import React from 'react';
 import "./OrdersList.css";
+import WebApp from '@twa-dev/sdk';
 
 type Order = {
     title: string;
@@ -9,6 +10,12 @@ type Order = {
 interface OrdersListProps {
     orders: Order[];
 }
+
+const backbutton = WebApp.BackButton;
+backbutton.show();
+backbutton.onClick(() => {
+    window.history.back();
+});
 
 const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
     return (
