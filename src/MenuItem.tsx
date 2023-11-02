@@ -3,12 +3,11 @@ import { Card, CardContent, CardMedia, Typography, Button, Grid, IconButton, Box
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
-
 interface ItemProps {
     title: string;
     price: number;
     imgUrl: string;
-    onAddChange: (isAdded: boolean) => void;
+    onAddChange: (title: string, isAdded: boolean) => void;
 }
 
 const MenuItem: FC<ItemProps> = ({ title, price, imgUrl, onAddChange }) => {
@@ -18,16 +17,22 @@ const MenuItem: FC<ItemProps> = ({ title, price, imgUrl, onAddChange }) => {
     const handleAddClick = () => {
         setIsAdding(true);
         setCount(1);
-        onAddChange(true);
+        onAddChange(title, true);
     };
-    const handleIncrease = () => setCount(count + 1);
+
+    const handleIncrease = () => {
+        setCount(count + 1);
+        onAddChange(title, true);
+    };
+
     const handleDecrease = () => {
         if (count === 1) {
             setIsAdding(false);
             setCount(0);
-            onAddChange(false);
+            onAddChange(title, false);
         } else {
             setCount(count - 1);
+            onAddChange(title, true);
         }
     };
 
@@ -101,3 +106,4 @@ const MenuItem: FC<ItemProps> = ({ title, price, imgUrl, onAddChange }) => {
 };
 
 export default MenuItem;
+
