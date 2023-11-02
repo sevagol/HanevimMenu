@@ -63,7 +63,8 @@ const App = () => {
         <Router>
             <MainButtonLogic addedItemsCount={addedItemsCount} />
             <Routes>
-                <Route path="/HanevimMenu/orders" element={<OrdersList orders={orders} />} />
+            <Route path="/HanevimMenu/orders" element={<div>Test Orders Page</div>} />
+
                 <Route path="/HanevimMenu/" element={
                     <div className="menu-container">
                         {menuItems.map((item, index) => (
