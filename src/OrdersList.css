@@ -35,3 +35,11 @@
 .orders-container li:last-child {
     border-bottom: none;
 }
+
+.order-options {
+    margin-left: 10px;
+    padding: 5px 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}

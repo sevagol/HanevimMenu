@@ -17,6 +17,13 @@ backbutton.onClick(() => {
     window.history.back();
 });
 
+const options = [
+    'Опция 1',
+    'Опция 2',
+    'Опция 3'
+];
+
+
 const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
     return (
         <div className="orders-container">
@@ -25,11 +32,17 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
                 {orders.map((order, index) => (
                     <li key={index}>
                         {order.title} x {order.count}
+                        <select className="order-options">
+                            {options.map((option, idx) => (
+                                <option key={idx} value={option}>{option}</option>
+                            ))}
+                        </select>
                     </li>
                 ))}
             </ul>
         </div>
     );
 };
+
 
 export default OrdersList;
