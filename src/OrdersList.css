@@ -1,16 +1,16 @@
 .orders-container {
     padding: 20px;
-    background-color: #f5f5f5;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    margin: 40px auto;
+    background-color: #000; /* Черный фон */
+    border-radius: 0; /* Убираем скругление */
+    box-shadow: none; /* Убираем тень */
+    width: 100%; /* Ширина на всю ширину экрана */
+    margin: 0; /* Убираем отступы */
 }
 
 .orders-container h2 {
     font-size: 24px;
     margin-bottom: 20px;
-    color: #333;
+    color: #fff; /* Белый цвет текста для контраста на черном фоне */
     text-align: center;
 }
 
@@ -21,10 +21,11 @@
 
 .orders-container li {
     padding: 10px 0;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0; 
     font-size: 18px;
     display: flex;
     justify-content: space-between;
+    color: #fff; /* Белый цвет текста для контраста на черном фоне */
 }
 
 .orders-container li:last-child {
