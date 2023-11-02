@@ -29,7 +29,7 @@ const MainButtonLogic: React.FC<{ addedItemsCount: number }> = ({ addedItemsCoun
 
 const App = () => {
     const [addedItemsCount, setAddedItemsCount] = useState(0);
-    const [orders, setOrders] = useState<{ title: string; count: number; }[]>([]);
+    const [orders, setOrders] = useState<{ title: string; count: number; price: number }[]>([]);
     
     const menuItems = [
         { title: 'Coffee', price: 10.99, imgUrl: Cup },
@@ -39,19 +39,29 @@ const App = () => {
 
     const handleAddChange = (title: string, isAdded: boolean) => {
       setAddedItemsCount((prevCount) => (isAdded ? prevCount + 1 : prevCount - 1));
+
+      const menuItem = menuItems.find(item => item.title === title);
+
       setOrders((prevOrders) => {
           const existingOrder = prevOrders.find(order => order.title === title);
+
           if (isAdded) {
               if (existingOrder) {
-                  return prevOrders.map(order => order.title === title ? { ...order, count: order.count + 1 } : order);
+                  return prevOrders.map(order => 
+                    order.title === title 
+                        ? { ...order, count: order.count + 1 } 
+                        : order);
               } else {
-                  return [...prevOrders, { title, count: 1 }];
+                  return [...prevOrders, { title, count: 1, price: menuItem?.price || 0 }];
               }
           } else {
               if (existingOrder?.count === 1) {
                   return prevOrders.filter(order => order.title !== title);
               } else if (existingOrder) {
-                  return prevOrders.map(order => order.title === title ? { ...order, count: order.count - 1 } : order);
+                  return prevOrders.map(order => 
+                    order.title === title 
+                        ? { ...order, count: order.count - 1 } 
+                        : order);
               }
               return prevOrders;
           }
