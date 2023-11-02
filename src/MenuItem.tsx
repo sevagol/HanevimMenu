@@ -74,7 +74,8 @@ const MenuItem: FC<ItemProps> = ({ title, price, imgUrl, onAddChange }) => {
                 alignItems: 'center',
                 backgroundColor: 'transparent',
                 boxShadow: 'none',
-                p: 1
+                p: 1,
+                fontSize: '0.7rem',
             }}>
                 <Typography gutterBottom variant="h6" component="div" sx={{ color: 'white' }}>
                     {title}

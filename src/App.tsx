@@ -33,7 +33,6 @@ const MainButtonLogic: React.FC<{ addedItemsCount: number }> = ({ addedItemsCoun
 
     return null;
 };
-
 const App = () => {
     const [addedItemsCount, setAddedItemsCount] = useState(0);
     const [orders, setOrders] = useState<{ title: string; count: number; price: number }[]>([]);
