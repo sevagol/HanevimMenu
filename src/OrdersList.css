@@ -1,6 +1,5 @@
 .orders-container {
-    padding: 20px;
-    background-color: rgba(0, 0, 0, 1); /* Полупрозрачный черный фон */
+    background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный фон */
     border-radius: 0;
     box-shadow: none;
     width: 100%;
