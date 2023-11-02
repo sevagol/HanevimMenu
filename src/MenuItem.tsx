@@ -77,12 +77,12 @@ const MenuItem: FC<ItemProps> = ({ title, price, imgUrl, onAddChange }) => {
                 p: 1,
                 mt: -1, 
             }}>
-                <Typography gutterBottom variant="body2" component="div" sx={{ color: 'white', fontSize: '1rem' }}>
-                    {title} ${price.toFixed(2)}
+                <Typography gutterBottom variant="h6" component="div" sx={{ color: 'white', fontSize: '1rem' }}>
+                    {title}
                 </Typography>
-                {/* <Typography variant="body2" color="white">
+                <Typography variant="body2" color="white">
                     ${price.toFixed(2)}
-                </Typography> */}
+                </Typography>
                 {!isAdding ? (
                     <Button variant="contained" onClick={handleAddClick} sx={{ mt: 2 }}>Add</Button>
                 ) : (
