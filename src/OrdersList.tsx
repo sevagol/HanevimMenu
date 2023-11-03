@@ -1,5 +1,6 @@
 import React from 'react';
 import "./OrdersList.css";
+import Milk from './assets/milk.svg';
 
 type Order = {
     title: string;
@@ -12,14 +13,7 @@ interface OrdersListProps {
     orders: Order[];
 }
 
-
-
-
-
-
 const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
-
-    // Рассчитываем итоговую сумму
     const total = orders.reduce((acc, order) => acc + (order.count * order.price), 0);
     
     return (
@@ -29,12 +23,10 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
                 {orders.map((order, index) => (
                     <li key={index}>
                         {order.title} x {order.count} - ${order.price.toFixed(2)}
-                        {order.options && (  // Если у заказа есть опции, отображаем select
-                            <select className="order-options">
-                                {order.options.map((option, idx) => (
-                                    <option key={idx} value={option}>{option}</option>
-                                ))}
-                            </select>
+                        {order.options && (  // Если у заказа есть опции, отображаем SVG кнопку
+                            <button className="svg-button" onClick={() => console.log('Options for', order.title)}>
+                                <img src={Milk} alt="Options" />
+                            </button>
                         )}
                     </li>
                 ))}
@@ -43,6 +35,7 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
         </div>
     );
 };
+
 
 
 

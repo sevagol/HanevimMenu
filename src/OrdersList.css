@@ -44,3 +44,16 @@
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+
+
+.svg-button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+}
+
+.svg-button img {
+    width: 25px;  
+    height: 25px;
+}
