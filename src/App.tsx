@@ -23,7 +23,7 @@ const MainButtonLogic: React.FC<{ addedItemsCount: number }> = ({ addedItemsCoun
     const orderbutton = WebApp.MainButton;
     orderbutton.setText("ORDER");
     orderbutton.setParams({
-        color: 'green'
+        color: '#00FF00'
     });
 
     useEffect(() => {
