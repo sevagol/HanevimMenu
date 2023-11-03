@@ -86,7 +86,7 @@ const App = () => {
                         ? { ...order, count: order.count + 1 } 
                         : order);
               } else {
-                  return [...prevOrders, { title, count: 1, price: menuItem?.price || 0 }];
+                  return [...prevOrders, { title, count: 1, price: menuItem?.price || 0, options: menuItem?.options }];
               }
           } else {
               if (existingOrder?.count === 1) {
