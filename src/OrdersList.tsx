@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import "./OrdersList.css";
 import Milk from './assets/milk.svg';
+import { Button, Menu, MenuItem } from '@mui/material';
 
 type Order = {
     title: string;
@@ -15,7 +16,18 @@ interface OrdersListProps {
 
 const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
     const total = orders.reduce((acc, order) => acc + (order.count * order.price), 0);
-    const [selectedOptions, setSelectedOptions] = useState<string[]>(Array(orders.length).fill(''));
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>, index: number) => {
+        setAnchorEl(event.currentTarget);
+        setSelectedIndex(index);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+        setSelectedIndex(null);
+    };
 
     return (
         <div className="orders-container">
@@ -26,31 +38,20 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
                         {order.title} x {order.count} - ${order.price.toFixed(2)}
                         {order.options && (
                             <>
-                                <button className="svg-button" onClick={(e) => {
-                                    // Этот код имитирует нажатие на select
-                                    const select = e.currentTarget.nextSibling as HTMLSelectElement;
-                                    const event = new MouseEvent("mousedown", {
-                                        bubbles: true,
-                                        cancelable: true,
-                                        view: window
-                                    });
-                                    select.dispatchEvent(event);
-                                }}>
+                                <Button onClick={(e) => handleClick(e, index)}>
                                     <img src={Milk} alt="Options" />
-                                </button>
-                                <select 
-                                    style={{display: 'none'}}  // скрыть select
-                                    value={selectedOptions[index]}
-                                    onChange={(e) => {
-                                        const newSelectedOptions = [...selectedOptions];
-                                        newSelectedOptions[index] = e.target.value;
-                                        setSelectedOptions(newSelectedOptions);
-                                    }}
+                                </Button>
+                                <Menu
+                                    anchorEl={anchorEl}
+                                    open={selectedIndex === index && Boolean(anchorEl)}
+                                    onClose={handleClose}
                                 >
                                     {order.options.map((option, idx) => (
-                                        <option key={idx} value={option}>{option}</option>
+                                        <MenuItem key={idx} onClick={handleClose}>
+                                            {option}
+                                        </MenuItem>
                                     ))}
-                                </select>
+                                </Menu>
                             </>
                         )}
                     </li>
