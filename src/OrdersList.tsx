@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import "./OrdersList.css";
 import Milk from './assets/milk.svg';
-import {useState } from 'react';
 
 type Order = {
     title: string;
@@ -13,10 +12,23 @@ type Order = {
 interface OrdersListProps {
     orders: Order[];
 }
+
 const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
     const total = orders.reduce((acc, order) => acc + (order.count * order.price), 0);
-    const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+    const selectRefs = useRef<(HTMLSelectElement | null)[]>([]);
     
+    const handleImageClick = (index: number) => {
+        const select = selectRefs.current[index];
+        if (select) {
+            const event = new MouseEvent('mousedown', {
+                'bubbles': true,
+                'cancelable': true,
+                'view': window
+            });
+            select.dispatchEvent(event);
+        }
+    }
+
     return (
         <div className="orders-container">
             <h2>Your Orders:</h2>
@@ -26,28 +38,17 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
                         {order.title} x {order.count} - ${order.price.toFixed(2)}
                         {order.options && (
                             <>
-                                <button className="svg-button" onClick={() => setSelectedOptions(selectedOptions => {
-                                    const newArray = [...selectedOptions];
-                                    newArray[index] = newArray[index] ? '' : (order.options ? order.options[0] : '');
-                                    return newArray;
-                                })}>
+                                <button className="svg-button" onClick={() => handleImageClick(index)}>
                                     <img src={Milk} alt="Options" />
                                 </button>
-                                {selectedOptions[index] && (
-                                    <select 
-                                        className="order-options" 
-                                        value={selectedOptions[index] || ''} 
-                                        onChange={(e) => {
-                                            const newSelectedOptions = [...selectedOptions];
-                                            newSelectedOptions[index] = e.target.value;
-                                            setSelectedOptions(newSelectedOptions);
-                                        }}
-                                    >
-                                        {order.options.map((option, idx) => (
-                                            <option key={idx} value={option}>{option}</option>
-                                        ))}
-                                    </select>
-                                )}
+                                <select 
+                                    ref={(el) => selectRefs.current[index] = el}
+                                    className="order-options"
+                                >
+                                    {order.options.map((option, idx) => (
+                                        <option key={idx} value={option}>{option}</option>
+                                    ))}
+                                </select>
                             </>
                         )}
                     </li>
@@ -57,11 +58,5 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
         </div>
     );
 };
-
-
-
-
-
-
 
 export default OrdersList;
