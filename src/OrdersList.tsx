@@ -13,12 +13,7 @@ interface OrdersListProps {
     orders: Order[];
 }
 
-const backbutton = WebApp.BackButton;
-backbutton.show();
-backbutton.onClick(() => {
-    window.history.back();
-    
-});
+
 
 
 
