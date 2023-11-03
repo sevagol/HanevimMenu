@@ -4,6 +4,19 @@ import Milk from './assets/milk.svg';
 import { Button, Menu, MenuItem } from '@mui/material';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const theme = createTheme({
+    palette: {
+      primary: {
+        main: "#6024a1", // основной цвет для кнопок
+      },
+      secondary: {
+        main: '#da771a', // цвет текста
+      },
+    },
+  });
+  
 
 type Order = {
     title: string;
@@ -69,11 +82,13 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
             </ul>
             <div className="total-price">Total: ${total.toFixed(2)}</div>
             <div className="toggle-container">
+            <ThemeProvider theme={theme}>
                 <ToggleButtonGroup
                     value={alignment}
                     exclusive
                     onChange={handleAlignment}
                     aria-label="text alignment"
+                    color="primary"
                 >
                     <ToggleButton value="toGo" aria-label="left aligned">
                         to go
@@ -82,6 +97,7 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
                         here
                     </ToggleButton>
                 </ToggleButtonGroup>
+                </ThemeProvider>
             </div>
         </div>
     );
