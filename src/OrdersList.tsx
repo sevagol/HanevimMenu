@@ -38,7 +38,7 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
                         {order.title} x {order.count} - ${order.price.toFixed(2)}
                         {order.options && (
                             <>
-                                <Button onClick={(e) => handleClick(e, index)}>
+                                <Button className='svg-button' onClick={(e) => handleClick(e, index)}>
                                     <img src={Milk} alt="Options" />
                                 </Button>
                                 <Menu
