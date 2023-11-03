@@ -20,52 +20,49 @@ const MainButtonLogic: React.FC<{ addedItemsCount: number }> = ({ addedItemsCoun
     const location = useLocation();
     const navigate = useNavigate();
 
+    // useEffect для обработки нажатия кнопки "назад"
+    useEffect(() => {
+        const backbutton = WebApp.BackButton;
     
-    
-   // useEffect для обработки нажатия кнопки "назад"
-useEffect(() => {
-    const backbutton = WebApp.BackButton;
-
-    if (location.pathname === "/orders") {
-        backbutton.show();
-
         const handleBackClick = () => {
-            window.history.back();
+            navigate("/"); // Вместо window.history.back()
         };
-
-        backbutton.onClick(handleBackClick);
-
-        // Отключаем обработчик при размонтировании
+    
+        if (location.pathname === "/orders") {
+            backbutton.show();
+            backbutton.onClick(handleBackClick);
+        } else {
+            backbutton.hide();
+            backbutton.offClick(handleBackClick); // Убедимся, что обработчик отключен, когда мы не находимся на странице заказов
+        }
+    
         return () => {
-            backbutton.offClick(handleBackClick);
+            backbutton.offClick(handleBackClick); // Отключаем обработчик при размонтировании
         };
-    } else {
-        backbutton.hide();
-    }
-
-}, [location.pathname]);
-
-// Отдельный useEffect для логики MainButton
-useEffect(() => {
-    const mainbutton = WebApp.MainButton;
-
-    if (location.pathname === "/") {
-        mainbutton.setParams({
-            color: '#1E83DB'
-        });
-        mainbutton.hide();
-    }
-
-    if (addedItemsCount > 0) {
-        mainbutton.setText("VIEW ORDER");
-        mainbutton.show();
-        mainbutton.onClick(() => {
-            navigate("/orders");
-        });
-    } else {
-        mainbutton.hide();
-    }
-}, [addedItemsCount, navigate, location]);
+    
+    }, [location.pathname, navigate]);
+    
+    // Отдельный useEffect для логики MainButton
+    useEffect(() => {
+        const mainbutton = WebApp.MainButton;
+    
+        if (location.pathname === "/") {
+            mainbutton.setParams({
+                color: '#1E83DB'
+            });
+        }
+    
+        if (addedItemsCount > 0) {
+            mainbutton.setText("VIEW ORDER");
+            mainbutton.show();
+            mainbutton.onClick(() => {
+                navigate("/orders");
+            });
+        } else {
+            mainbutton.hide();
+        }
+    }, [addedItemsCount, navigate, location.pathname]);
+    
 
     
     return null;
