@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import "./OrdersList.css";
 import Milk from './assets/milk.svg';
 import { Button, Menu, MenuItem } from '@mui/material';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
 type Order = {
     title: string;
@@ -15,6 +17,11 @@ interface OrdersListProps {
 }
 
 const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
+    const [alignment, setAlignment] = React.useState<'toGo' | 'here'>('toGo');
+
+    const handleAlignment = (event: React.MouseEvent<HTMLElement>, newAlignment: 'toGo' | 'here') => {
+        setAlignment(newAlignment);
+    };
     const total = orders.reduce((acc, order) => acc + (order.count * order.price), 0);
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -58,6 +65,21 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
                 ))}
             </ul>
             <div className="total-price">Total: ${total.toFixed(2)}</div>
+            <div className="toggle-container">
+                <ToggleButtonGroup
+                    value={alignment}
+                    exclusive
+                    onChange={handleAlignment}
+                    aria-label="text alignment"
+                >
+                    <ToggleButton value="toGo" aria-label="left aligned">
+                        to go
+                    </ToggleButton>
+                    <ToggleButton value="here" aria-label="centered">
+                        here
+                    </ToggleButton>
+                </ToggleButtonGroup>
+            </div>
         </div>
     );
 };
