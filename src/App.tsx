@@ -20,8 +20,6 @@ const MainButtonLogic: React.FC<{ addedItemsCount: number }> = ({ addedItemsCoun
     const location = useLocation();
     const navigate = useNavigate();
 
-    const orderbutton = WebApp.MainButton;
-    orderbutton.setText("ORDER");
     
     
     useEffect(() => {
@@ -29,7 +27,7 @@ const MainButtonLogic: React.FC<{ addedItemsCount: number }> = ({ addedItemsCoun
         const backbutton = WebApp.BackButton;
     
         if (location.pathname === "/orders") {
-            mainbutton.hide();
+            mainbutton.setText("ORDER")
             backbutton.show();
             backbutton.onClick(() => {
                 window.history.back();
@@ -38,7 +36,7 @@ const MainButtonLogic: React.FC<{ addedItemsCount: number }> = ({ addedItemsCoun
         }
     
         if (location.pathname === "/") {
-            orderbutton.setParams({
+            mainbutton.setParams({
                 color: '#1E83DB'
             });
             backbutton.hide();
