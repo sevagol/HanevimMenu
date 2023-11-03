@@ -65,6 +65,9 @@ const MainButtonLogic: React.FC<{ addedItemsCount: number }> = ({ addedItemsCoun
         }
         // Если мы на странице заказов
         else if (location.pathname === "/orders") {
+            mainbutton.setParams({
+                color: '#24c46a'
+            });
             mainbutton.setText("ORDER NOW");
             mainbutton.show();
             mainbutton.onClick(() => {
