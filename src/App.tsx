@@ -20,10 +20,17 @@ const MainButtonLogic: React.FC<{ addedItemsCount: number }> = ({ addedItemsCoun
     const location = useLocation();
     const navigate = useNavigate();
 
+    const orderbutton = WebApp.MainButton;
+    orderbutton.setText("ORDER");
+    orderbutton.setParams({
+        color: 'green'
+    });
+
     useEffect(() => {
         const mainbutton = WebApp.MainButton;
         if (location.pathname === "/orders") {
             mainbutton.hide();
+            orderbutton.show();
             return; // Если пользователь находится на странице заказов, просто скройте кнопку и выйдите из useEffect
         }
         if (addedItemsCount > 0) {
