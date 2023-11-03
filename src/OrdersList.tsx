@@ -1,6 +1,7 @@
 import React from 'react';
 import "./OrdersList.css";
 import WebApp from '@twa-dev/sdk';
+import { useLocation } from 'react-router-dom';
 
 type Order = {
     title: string;
@@ -17,11 +18,15 @@ const backbutton = WebApp.BackButton;
 backbutton.show();
 backbutton.onClick(() => {
     // Перенаправляем пользователя на главную страницу не обновляя ее
-    window.history.pushState({}, '', '/');
+    window.history.back
     
 });
 
+const location = useLocation();
 
+if (location.pathname === "/") {
+    backbutton.hide();
+}
 
 
 const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
