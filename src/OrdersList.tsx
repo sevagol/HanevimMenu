@@ -6,6 +6,7 @@ type Order = {
     title: string;
     count: number;
     price: number;
+    options?: string[];
 };
 
 interface OrdersListProps {
@@ -18,18 +19,14 @@ backbutton.onClick(() => {
     window.history.back();
 });
 
-const options = [
-    'Опция 1',
-    'Опция 2',
-    'Опция 3'
-];
+
 
 
 const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
 
     // Рассчитываем итоговую сумму
     const total = orders.reduce((acc, order) => acc + (order.count * order.price), 0);
-
+    
     return (
         <div className="orders-container">
             <h2>Your Orders:</h2>
@@ -37,11 +34,13 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
                 {orders.map((order, index) => (
                     <li key={index}>
                         {order.title} x {order.count} - ${order.price.toFixed(2)}
-                        <select className="order-options">
-                            {options.map((option, idx) => (
-                                <option key={idx} value={option}>{option}</option>
-                            ))}
-                        </select>
+                        {order.options && (  // Если у заказа есть опции, отображаем select
+                            <select className="order-options">
+                                {order.options.map((option, idx) => (
+                                    <option key={idx} value={option}>{option}</option>
+                                ))}
+                            </select>
+                        )}
                     </li>
                 ))}
             </ul>
@@ -49,6 +48,7 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
         </div>
     );
 };
+
 
 
 

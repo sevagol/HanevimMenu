@@ -60,8 +60,8 @@ const App = () => {
     const [orders, setOrders] = useState<{ title: string; count: number; price: number }[]>([]);
     
     const menuItems = [
-        { title: 'Cappucino', price: 4.99, imgUrl: Cappucino },
-        { title: 'Cortado', price: 5.99, imgUrl: Cortado },
+        { title: 'Cappucino', price: 4.99, imgUrl: Cappucino, options: ['Молоко', 'Сахар'] },
+        { title: 'Cortado', price: 5.99, imgUrl: Cortado, options: ['Молоко', 'Сахар'] },
         { title: 'Espresso', price: 2.99, imgUrl: Espresso },
         { title: 'Flat White', price: 4.99, imgUrl: FlatWhite },
         { title: 'Latte', price: 4.99, imgUrl: Latte },
