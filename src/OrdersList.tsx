@@ -16,7 +16,7 @@ interface OrdersListProps {
 const backbutton = WebApp.BackButton;
 backbutton.show();
 backbutton.onClick(() => {
-    window.history.back();
+    window.location.href = "/";
 });
 
 
