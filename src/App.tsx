@@ -22,17 +22,21 @@ const MainButtonLogic: React.FC<{ addedItemsCount: number }> = ({ addedItemsCoun
 
     const orderbutton = WebApp.MainButton;
     orderbutton.setText("ORDER");
-    orderbutton.setParams({
-        color: '#1E83DB'
-    });
-
+    
+    
     useEffect(() => {
         const mainbutton = WebApp.MainButton;
-        mainbutton.setParams({
-            color: '#DB831E'
-        });
+        
+        if (location.pathname === "/") {
+            orderbutton.setParams({
+                color: '#1E83DB'
+            });
+        }
 
         if (location.pathname === "/orders") {
+            mainbutton.setParams({
+                color: '#DB831E'
+            });
             mainbutton.hide();
             orderbutton.show();
             return; // Если пользователь находится на странице заказов, просто скройте кнопку и выйдите из useEffect
