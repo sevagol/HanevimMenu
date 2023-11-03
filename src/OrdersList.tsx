@@ -35,7 +35,7 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
             <ul>
                 {orders.map((order, index) => (
                     <li key={index}>
-                        {order.title} x {order.count} - ${order.price.toFixed(2)}
+                        {order.title} x {order.count} - ₪{order.price.toFixed(2)}
                         {order.options && (
                             <>
                                 <Button className='svg-button' onClick={(e) => handleClick(e, index)}>

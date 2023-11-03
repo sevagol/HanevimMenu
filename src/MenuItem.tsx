@@ -13,36 +13,36 @@ interface ItemProps {
 
 
 const MenuItem: FC<ItemProps> = ({ orders, title, price, imgUrl, onAddChange }) => {
-const currentOrder = orders.find(order => order.title === title);
-const initialCount = currentOrder ? currentOrder.count : 0;
+    const currentOrder = orders.find(order => order.title === title);
+    const initialCount = currentOrder ? currentOrder.count : 0;
 
-const [count, setCount] = useState(initialCount);
-const [isAdding, setIsAdding] = useState(initialCount > 0);
+    const [count, setCount] = useState(initialCount);
+    const [isAdding, setIsAdding] = useState(initialCount > 0);
 
 
-const handleAddClick = () => {
-    setIsAdding(true);
-    setCount(1);
-    onAddChange(title, true, 1);
-};
+    const handleAddClick = () => {
+        setIsAdding(true);
+        setCount(1);
+        onAddChange(title, true, 1);
+    };
 
-const handleIncrease = () => {
-    const newCount = count + 1;
-    setCount(newCount);
-    onAddChange(title, true, newCount);
-};
-
-const handleDecrease = () => {
-    if (count === 1) {
-        setIsAdding(false);
-        setCount(0);
-        onAddChange(title, false, 0);
-    } else {
-        const newCount = count - 1;
+    const handleIncrease = () => {
+        const newCount = count + 1;
         setCount(newCount);
         onAddChange(title, true, newCount);
-    }
-};
+    };
+
+    const handleDecrease = () => {
+        if (count === 1) {
+            setIsAdding(false);
+            setCount(0);
+            onAddChange(title, false, 0);
+        } else {
+            const newCount = count - 1;
+            setCount(newCount);
+            onAddChange(title, true, newCount);
+        }
+    };
 
 
     return (
@@ -84,13 +84,13 @@ const handleDecrease = () => {
                 backgroundColor: 'transparent',
                 boxShadow: 'none',
                 p: 1,
-                mt: -1, 
+                mt: -1,
             }}>
                 <Typography gutterBottom variant="h6" component="div" sx={{ color: 'white', fontSize: '1rem' }}>
                     {title}
                 </Typography>
                 <Typography variant="body2" color="white">
-                    ${price.toFixed(2)}
+                    ₪{price.toFixed(2)}
                 </Typography>
                 {!isAdding ? (
                     <Button variant="contained" onClick={handleAddClick} sx={{ mt: 2 }}>Add</Button>
