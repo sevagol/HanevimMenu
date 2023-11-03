@@ -19,9 +19,12 @@ interface OrdersListProps {
 const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
     const [alignment, setAlignment] = React.useState<'toGo' | 'here'>('toGo');
 
-    const handleAlignment = (event: React.MouseEvent<HTMLElement>, newAlignment: 'toGo' | 'here') => {
-        setAlignment(newAlignment);
+    const handleAlignment = (_: any, newValue: 'toGo' | 'here') => {
+        setAlignment(newValue);
     };
+    
+    
+    
     const total = orders.reduce((acc, order) => acc + (order.count * order.price), 0);
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
