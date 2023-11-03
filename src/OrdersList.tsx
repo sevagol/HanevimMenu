@@ -1,6 +1,5 @@
 import React from 'react';
 import "./OrdersList.css";
-import WebApp from '@twa-dev/sdk';
 
 type Order = {
     title: string;
