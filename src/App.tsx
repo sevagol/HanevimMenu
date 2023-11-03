@@ -22,42 +22,51 @@ const MainButtonLogic: React.FC<{ addedItemsCount: number }> = ({ addedItemsCoun
 
     
     
-    useEffect(() => {
-        const mainbutton = WebApp.MainButton;
-        const backbutton = WebApp.BackButton;
-    
-        if (location.pathname === "/orders") {
-            mainbutton.hide();
-            backbutton.show();
-            
-            const handleBackClick = () => {
-                window.history.back();
-            };
-            
-            backbutton.onClick(handleBackClick);
-    
-            return () => {
-                backbutton.offClick(handleBackClick);
-            };
-        }
-    
-        if (location.pathname === "/") {
-            mainbutton.setParams({
-                color: '#1E83DB'
-            });
-            backbutton.hide();
-        }
-    
-        if (addedItemsCount > 0) {
-            mainbutton.setText("VIEW ORDER");
-            mainbutton.show();
-            mainbutton.onClick(() => {
-                navigate("/orders");
-            });
-        } else {
-            mainbutton.hide();
-        }
-    }, [addedItemsCount, navigate, location]);
+   // useEffect для обработки нажатия кнопки "назад"
+useEffect(() => {
+    const backbutton = WebApp.BackButton;
+
+    if (location.pathname === "/orders") {
+        backbutton.show();
+
+        const handleBackClick = () => {
+            window.history.back();
+        };
+
+        backbutton.onClick(handleBackClick);
+
+        // Отключаем обработчик при размонтировании
+        return () => {
+            backbutton.offClick(handleBackClick);
+        };
+    } else {
+        backbutton.hide();
+    }
+
+}, [location.pathname]);
+
+// Отдельный useEffect для логики MainButton
+useEffect(() => {
+    const mainbutton = WebApp.MainButton;
+
+    if (location.pathname === "/") {
+        mainbutton.setParams({
+            color: '#1E83DB'
+        });
+        mainbutton.hide();
+    }
+
+    if (addedItemsCount > 0) {
+        mainbutton.setText("VIEW ORDER");
+        mainbutton.show();
+        mainbutton.onClick(() => {
+            navigate("/orders");
+        });
+    } else {
+        mainbutton.hide();
+    }
+}, [addedItemsCount, navigate, location]);
+
     
     return null;
 };
