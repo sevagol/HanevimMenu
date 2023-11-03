@@ -50,7 +50,6 @@ const MainButtonLogic: React.FC<{ addedItemsCount: number }> = ({ addedItemsCoun
             mainbutton.setParams({
                 color: '#1E83DB'
             });
-            mainbutton.setText("VIEW ORDER");
         }
     
         if (addedItemsCount > 0) {
@@ -58,7 +57,6 @@ const MainButtonLogic: React.FC<{ addedItemsCount: number }> = ({ addedItemsCoun
             mainbutton.show();
             mainbutton.onClick(() => {
                 navigate("/orders");
-                mainbutton.setText("ORDER");
             });
         } else {
             mainbutton.hide();
