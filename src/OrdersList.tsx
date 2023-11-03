@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 import "./OrdersList.css";
 import Milk from './assets/milk.svg';
 
@@ -15,19 +15,7 @@ interface OrdersListProps {
 
 const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
     const total = orders.reduce((acc, order) => acc + (order.count * order.price), 0);
-    const selectRefs = useRef<(HTMLSelectElement | null)[]>([]);
-    
-    const handleImageClick = (index: number) => {
-        const select = selectRefs.current[index];
-        if (select) {
-            const event = new MouseEvent('mousedown', {
-                'bubbles': true,
-                'cancelable': true,
-                'view': window
-            });
-            select.dispatchEvent(event);
-        }
-    }
+    const [selectedOptions, setSelectedOptions] = useState<string[]>(Array(orders.length).fill(''));
 
     return (
         <div className="orders-container">
@@ -38,12 +26,26 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
                         {order.title} x {order.count} - ${order.price.toFixed(2)}
                         {order.options && (
                             <>
-                                <button className="svg-button" onClick={() => handleImageClick(index)}>
+                                <button className="svg-button" onClick={(e) => {
+                                    // Этот код имитирует нажатие на select
+                                    const select = e.currentTarget.nextSibling as HTMLSelectElement;
+                                    const event = new MouseEvent("mousedown", {
+                                        bubbles: true,
+                                        cancelable: true,
+                                        view: window
+                                    });
+                                    select.dispatchEvent(event);
+                                }}>
                                     <img src={Milk} alt="Options" />
                                 </button>
                                 <select 
-                                    ref={(el) => selectRefs.current[index] = el}
-                                    className="order-options"
+                                    style={{display: 'none'}}  // скрыть select
+                                    value={selectedOptions[index]}
+                                    onChange={(e) => {
+                                        const newSelectedOptions = [...selectedOptions];
+                                        newSelectedOptions[index] = e.target.value;
+                                        setSelectedOptions(newSelectedOptions);
+                                    }}
                                 >
                                     {order.options.map((option, idx) => (
                                         <option key={idx} value={option}>{option}</option>
