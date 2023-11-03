@@ -16,17 +16,27 @@ import './App.css';
 import WebApp from '@twa-dev/sdk';
 import { Grid } from '@mui/material';
 
-const MainButtonLogic: React.FC<{ addedItemsCount: number, orders: { title: string; count: number; price: number }[] }> = ({ addedItemsCount, orders }) => {
+const MainButtonLogic: React.FC<{ addedItemsCount: number, orders: { title: string; count: number; price: number }[], alignment: 'toGo' | 'here' }> = ({ addedItemsCount, orders, alignment }) => {
     const location = useLocation();
     const navigate = useNavigate();
+
 
     const TELEGRAM_TOKEN = "6958756705:AAFTQYV28jtGBu-Qa0ZkFf_6M1ZNGoX3EOg";
     const CHANNEL_ID = "-1002008195730";
 
-    const sendOrderToTelegram = (orders: { title: string; count: number; price: number; }[]) => {
-        const orderInfo = orders.map(order => `${order.title} - ${order.count}x`).join('\n');
+    const sendOrderToTelegram = (orders: { title: string; count: number; price: number; option?: string }[]) => {
+        const orderInfo = orders.map(order => {
+            let orderText = `${order.title} - ${order.count}x`;
+            if (order.option) {
+                orderText += ` (Option: ${order.option})`;
+            }
+            return orderText;
+        }).join('\n');
+        
+        const finalMessage = `Order Type: ${alignment === "toGo" ? "To Go" : "Here"}\n\n${orderInfo}`;
+    
         const baseURL = `https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`;
-        const messageText = `New Order:\n\n${orderInfo}`;
+        const messageText = `New Order:\n\n${finalMessage}`;
 
         fetch(baseURL, {
             method: "POST",
@@ -106,6 +116,8 @@ const MainButtonLogic: React.FC<{ addedItemsCount: number, orders: { title: stri
 const App = () => {
     const [addedItemsCount, setAddedItemsCount] = useState(0);
     const [orders, setOrders] = useState<{ title: string; count: number; price: number }[]>([]);
+    const [alignment, setAlignment] = useState<'toGo' | 'here'>('here');
+
 
     const menuItems = [
         { title: 'Cappucino', price: 4.99, imgUrl: Cappucino, options: ['Soy', 'Almond', 'Oat', 'Regular'] },
@@ -152,9 +164,9 @@ const App = () => {
 
     return (
         <Router>
-            <MainButtonLogic addedItemsCount={addedItemsCount} orders={orders} />
+            <MainButtonLogic addedItemsCount={addedItemsCount} orders={orders} alignment={alignment} />
             <Routes>
-                <Route path="/orders" element={<OrdersList orders={orders} />} />
+            <Route path="/orders" element={<OrdersList orders={orders} alignment={alignment} setAlignment={setAlignment} />} />
                 <Route path="/" element={
                     <div className="menu-container">
                         <Grid container spacing={0.5}>

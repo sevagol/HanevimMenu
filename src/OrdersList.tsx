@@ -36,10 +36,13 @@ type Order = {
 
 interface OrdersListProps {
     orders: Order[];
+    alignment: 'toGo' | 'here';
+    setAlignment: React.Dispatch<React.SetStateAction<'toGo' | 'here'>>;
 }
 
-const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
-    const [alignment, setAlignment] = React.useState<'toGo' | 'here'>('toGo');
+
+
+const OrdersList: React.FC<OrdersListProps> = ({ orders, alignment, setAlignment }) => {
 
     const handleAlignment = (_: any, newValue: 'toGo' | 'here') => {
         setAlignment(newValue);
