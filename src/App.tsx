@@ -16,18 +16,39 @@ import './App.css';
 import WebApp from '@twa-dev/sdk';
 import { Grid } from '@mui/material';
 
-const MainButtonLogic: React.FC<{ addedItemsCount: number }> = ({ addedItemsCount }) => {
+const MainButtonLogic: React.FC<{ addedItemsCount: number, orders: { title: string; count: number; price: number }[] }> = ({ addedItemsCount, orders }) => {
     const location = useLocation();
     const navigate = useNavigate();
+
+    const TELEGRAM_TOKEN = "6958756705:AAFTQYV28jtGBu-Qa0ZkFf_6M1ZNGoX3EOg";
+    const CHANNEL_ID = "-1002008195730";
+
+    const sendOrderToTelegram = (orders: { title: string; count: number; price: number; }[]) => {
+        const orderInfo = orders.map(order => `${order.title} - ${order.count}x`).join('\n');
+        const baseURL = `https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`;
+        const messageText = `New Order:\n\n${orderInfo}`;
+
+        fetch(baseURL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                chat_id: CHANNEL_ID,
+                text: messageText
+            })
+        });
+    }
+
 
     // useEffect для обработки нажатия кнопки "назад"
     useEffect(() => {
         const backbutton = WebApp.BackButton;
-    
+
         const handleBackClick = () => {
             navigate("/"); // Вместо window.history.back()
         };
-    
+
         if (location.pathname === "/orders") {
             backbutton.show();
             backbutton.onClick(handleBackClick);
@@ -35,23 +56,23 @@ const MainButtonLogic: React.FC<{ addedItemsCount: number }> = ({ addedItemsCoun
             backbutton.hide();
             backbutton.offClick(handleBackClick); // Убедимся, что обработчик отключен, когда мы не находимся на странице заказов
         }
-    
+
         return () => {
             backbutton.offClick(handleBackClick); // Отключаем обработчик при размонтировании
         };
-    
+
     }, [location.pathname, navigate]);
-    
+
     // Отдельный useEffect для логики MainButton
     useEffect(() => {
         const mainbutton = WebApp.MainButton;
-    
+
         // Если мы на главной странице
         if (location.pathname === "/") {
             mainbutton.setParams({
                 color: '#1E83DB'
             });
-    
+
             // Показываем кнопку "VIEW ORDER" если есть добавленные товары, иначе скрываем ее
             if (addedItemsCount > 0) {
                 mainbutton.setText("VIEW ORDER");
@@ -71,23 +92,24 @@ const MainButtonLogic: React.FC<{ addedItemsCount: number }> = ({ addedItemsCoun
             mainbutton.setText("ORDER NOW");
             mainbutton.show();
             mainbutton.onClick(() => {
-                navigate("/");
+                sendOrderToTelegram(orders);
             });
+
         }
     }, [addedItemsCount, navigate, location.pathname]);
-    
-    
 
-    
+
+
+
     return null;
 };
 const App = () => {
     const [addedItemsCount, setAddedItemsCount] = useState(0);
     const [orders, setOrders] = useState<{ title: string; count: number; price: number }[]>([]);
-    
+
     const menuItems = [
         { title: 'Cappucino', price: 4.99, imgUrl: Cappucino, options: ['Soy', 'Almond', 'Oat', 'Regular'] },
-        { title: 'Cortado', price: 5.99, imgUrl: Cortado, options: ['Soy', 'Almond', 'Oat', 'Regular']},
+        { title: 'Cortado', price: 5.99, imgUrl: Cortado, options: ['Soy', 'Almond', 'Oat', 'Regular'] },
         { title: 'Espresso', price: 2.99, imgUrl: Espresso },
         { title: 'Flat White', price: 4.99, imgUrl: FlatWhite, options: ['Soy', 'Almond', 'Oat', 'Regular'] },
         { title: 'Latte', price: 4.99, imgUrl: Latte, options: ['Soy', 'Almond', 'Oat', 'Regular'] },
@@ -98,49 +120,49 @@ const App = () => {
     ];
 
     const handleAddChange = (title: string, isAdded: boolean) => {
-      setAddedItemsCount((prevCount) => (isAdded ? prevCount + 1 : prevCount - 1));
+        setAddedItemsCount((prevCount) => (isAdded ? prevCount + 1 : prevCount - 1));
 
-      const menuItem = menuItems.find(item => item.title === title);
+        const menuItem = menuItems.find(item => item.title === title);
 
-      setOrders((prevOrders) => {
-          const existingOrder = prevOrders.find(order => order.title === title);
+        setOrders((prevOrders) => {
+            const existingOrder = prevOrders.find(order => order.title === title);
 
-          if (isAdded) {
-              if (existingOrder) {
-                  return prevOrders.map(order => 
-                    order.title === title 
-                        ? { ...order, count: order.count + 1 } 
-                        : order);
-              } else {
-                  return [...prevOrders, { title, count: 1, price: menuItem?.price || 0, options: menuItem?.options }];
-              }
-          } else {
-              if (existingOrder?.count === 1) {
-                  return prevOrders.filter(order => order.title !== title);
-              } else if (existingOrder) {
-                  return prevOrders.map(order => 
-                    order.title === title 
-                        ? { ...order, count: order.count - 1 } 
-                        : order);
-              }
-              return prevOrders;
-          }
-      });
-  };
+            if (isAdded) {
+                if (existingOrder) {
+                    return prevOrders.map(order =>
+                        order.title === title
+                            ? { ...order, count: order.count + 1 }
+                            : order);
+                } else {
+                    return [...prevOrders, { title, count: 1, price: menuItem?.price || 0, options: menuItem?.options }];
+                }
+            } else {
+                if (existingOrder?.count === 1) {
+                    return prevOrders.filter(order => order.title !== title);
+                } else if (existingOrder) {
+                    return prevOrders.map(order =>
+                        order.title === title
+                            ? { ...order, count: order.count - 1 }
+                            : order);
+                }
+                return prevOrders;
+            }
+        });
+    };
 
     return (
         <Router>
-            <MainButtonLogic addedItemsCount={addedItemsCount} />
+            <MainButtonLogic addedItemsCount={addedItemsCount} orders={orders} />
             <Routes>
                 <Route path="/orders" element={<OrdersList orders={orders} />} />
                 <Route path="/" element={
                     <div className="menu-container">
                         <Grid container spacing={0.5}>
-                        {menuItems.map((item, index) => (
-                            <Grid item xs={4} sm={4} md={4} key={index}>
-                          <MenuItem {...item} key={index} onAddChange={handleAddChange} orders={orders} />  
-                            </Grid>
-                        ))}
+                            {menuItems.map((item, index) => (
+                                <Grid item xs={4} sm={4} md={4} key={index}>
+                                    <MenuItem {...item} key={index} onAddChange={handleAddChange} orders={orders} />
+                                </Grid>
+                            ))}
                         </Grid>
                     </div>
                 } />
