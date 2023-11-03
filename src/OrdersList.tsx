@@ -17,7 +17,6 @@ const backbutton = WebApp.BackButton;
 backbutton.show();
 backbutton.onClick(() => {
     window.history.back();
-    backbutton.hide();
     
 });
 
