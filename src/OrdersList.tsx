@@ -10,10 +10,15 @@ import { styled } from '@mui/system';
 const StyledToggleButton = styled(ToggleButton)({
     color: 'orange',
     '&.Mui-selected': {
-      backgroundColor: 'violet',
+      backgroundColor: '#7526c9',
+      color: 'orange',
+    },
+    '&.MuiToggleButton-root:active': {
+      backgroundColor: '#7526c9',
       color: 'orange',
     },
   });
+  
   
   
   
