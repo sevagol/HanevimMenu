@@ -23,11 +23,15 @@ const MainButtonLogic: React.FC<{ addedItemsCount: number }> = ({ addedItemsCoun
     const orderbutton = WebApp.MainButton;
     orderbutton.setText("ORDER");
     orderbutton.setParams({
-        color: '#00FF00'
+        color: '#1E83DB'
     });
 
     useEffect(() => {
         const mainbutton = WebApp.MainButton;
+        mainbutton.setParams({
+            color: '#DB831E'
+        });
+
         if (location.pathname === "/orders") {
             mainbutton.hide();
             orderbutton.show();
