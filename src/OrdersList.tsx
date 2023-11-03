@@ -15,7 +15,7 @@ interface OrdersListProps {
 }
 const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
     const total = orders.reduce((acc, order) => acc + (order.count * order.price), 0);
-    const [expandedOrderIndex, setExpandedOrderIndex] = useState<number | null>(null);
+    const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
     
     return (
         <div className="orders-container">
@@ -24,17 +24,29 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
                 {orders.map((order, index) => (
                     <li key={index}>
                         {order.title} x {order.count} - ${order.price.toFixed(2)}
-                        {order.options && (  // Если у заказа есть опции, отображаем SVG кнопку
+                        {order.options && (
                             <>
-                                <button className="svg-button" onClick={() => setExpandedOrderIndex(expandedOrderIndex === index ? null : index)}>
+                                <button className="svg-button" onClick={() => setSelectedOptions(selectedOptions => {
+                                    const newArray = [...selectedOptions];
+                                    newArray[index] = newArray[index] ? '' : (order.options ? order.options[0] : '');
+                                    return newArray;
+                                })}>
                                     <img src={Milk} alt="Options" />
                                 </button>
-                                {expandedOrderIndex === index && (
-                                    <ul className="order-options">
+                                {selectedOptions[index] && (
+                                    <select 
+                                        className="order-options" 
+                                        value={selectedOptions[index] || ''} 
+                                        onChange={(e) => {
+                                            const newSelectedOptions = [...selectedOptions];
+                                            newSelectedOptions[index] = e.target.value;
+                                            setSelectedOptions(newSelectedOptions);
+                                        }}
+                                    >
                                         {order.options.map((option, idx) => (
-                                            <li key={idx}>{option}</li>
+                                            <option key={idx} value={option}>{option}</option>
                                         ))}
-                                    </ul>
+                                    </select>
                                 )}
                             </>
                         )}
@@ -45,6 +57,7 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
         </div>
     );
 };
+
 
 
 
