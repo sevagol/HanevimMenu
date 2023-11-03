@@ -26,11 +26,15 @@ const MainButtonLogic: React.FC<{ addedItemsCount: number }> = ({ addedItemsCoun
     
     useEffect(() => {
         const mainbutton = WebApp.MainButton;
+        const backbutton = WebApp.BackButton;
+
+
         
         if (location.pathname === "/") {
             orderbutton.setParams({
                 color: '#1E83DB'
             });
+            backbutton.hide();
         }
 
         if (location.pathname === "/orders") {
@@ -38,7 +42,12 @@ const MainButtonLogic: React.FC<{ addedItemsCount: number }> = ({ addedItemsCoun
                 color: '#DB831E'
             });
             mainbutton.hide();
+            backbutton.show();
             orderbutton.show();
+            backbutton.onClick(() => {
+                window.history.back();
+                
+            });
             return; // Если пользователь находится на странице заказов, просто скройте кнопку и выйдите из useEffect
         }
         if (addedItemsCount > 0) {
