@@ -27,14 +27,17 @@ const MainButtonLogic: React.FC<{ addedItemsCount: number }> = ({ addedItemsCoun
         const backbutton = WebApp.BackButton;
     
         if (location.pathname === "/orders") {
-            mainbutton.setText("ORDER")
+            mainbutton.hide();
             backbutton.show();
-            backbutton.onClick(() => {
+            const handleBackClick = () => {
                 window.history.back();
-            });
-            return;
-        }
+            };
+            backbutton.onClick(handleBackClick);
     
+            return () => {
+                backbutton.offClick(handleBackClick); // Предполагается, что есть метод offClick или что-то похожее для удаления обработчика
+            };
+        }
         if (location.pathname === "/") {
             mainbutton.setParams({
                 color: '#1E83DB'
