@@ -112,7 +112,7 @@ const App = () => {
                         <Grid container spacing={0.5}>
                         {menuItems.map((item, index) => (
                             <Grid item xs={4} sm={4} md={4} key={index}>
-                            <MenuItem {...item} key={index} onAddChange={handleAddChange} />
+                          <MenuItem {...item} key={index} onAddChange={handleAddChange} orders={orders} />  
                             </Grid>
                         ))}
                         </Grid>

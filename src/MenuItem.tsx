@@ -7,34 +7,43 @@ interface ItemProps {
     title: string;
     price: number;
     imgUrl: string;
-    onAddChange: (title: string, isAdded: boolean) => void;
+    onAddChange: (title: string, isAdded: boolean, count: number) => void; // Обновлено для передачи количества
+    orders: { title: string, count: number }[]; // Новое свойство
 }
 
-const MenuItem: FC<ItemProps> = ({ title, price, imgUrl, onAddChange }) => {
-    const [count, setCount] = useState(0);
-    const [isAdding, setIsAdding] = useState(false);
 
-    const handleAddClick = () => {
-        setIsAdding(true);
-        setCount(1);
-        onAddChange(title, true);
-    };
+const MenuItem: FC<ItemProps> = ({ orders, title, price, imgUrl, onAddChange }) => {
+const currentOrder = orders.find(order => order.title === title);
+const initialCount = currentOrder ? currentOrder.count : 0;
 
-    const handleIncrease = () => {
-        setCount(count + 1);
-        onAddChange(title, true);
-    };
+const [count, setCount] = useState(initialCount);
+const [isAdding, setIsAdding] = useState(initialCount > 0);
 
-    const handleDecrease = () => {
-        if (count === 1) {
-            setIsAdding(false);
-            setCount(0);
-            onAddChange(title, false);
-        } else {
-            setCount(count - 1);
-            onAddChange(title, true);
-        }
-    };
+
+const handleAddClick = () => {
+    setIsAdding(true);
+    setCount(1);
+    onAddChange(title, true, 1);
+};
+
+const handleIncrease = () => {
+    const newCount = count + 1;
+    setCount(newCount);
+    onAddChange(title, true, newCount);
+};
+
+const handleDecrease = () => {
+    if (count === 1) {
+        setIsAdding(false);
+        setCount(0);
+        onAddChange(title, false, 0);
+    } else {
+        const newCount = count - 1;
+        setCount(newCount);
+        onAddChange(title, true, newCount);
+    }
+};
+
 
     return (
         <Card sx={{
