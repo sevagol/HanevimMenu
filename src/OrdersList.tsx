@@ -17,6 +17,10 @@ const StyledToggleButton = styled(ToggleButton)({
       backgroundColor: '#7526c9',
       color: 'orange',
     },
+    '&.MuiToggleButton-root:hover': {
+        backgroundColor: '#7526c9',
+        color: 'orange',
+      },
   });
   
   
