@@ -46,22 +46,33 @@ const MainButtonLogic: React.FC<{ addedItemsCount: number }> = ({ addedItemsCoun
     useEffect(() => {
         const mainbutton = WebApp.MainButton;
     
+        // Если мы на главной странице
         if (location.pathname === "/") {
             mainbutton.setParams({
                 color: '#1E83DB'
             });
-        }
     
-        if (addedItemsCount > 0) {
-            mainbutton.setText("VIEW ORDER");
+            // Показываем кнопку "VIEW ORDER" если есть добавленные товары, иначе скрываем ее
+            if (addedItemsCount > 0) {
+                mainbutton.setText("VIEW ORDER");
+                mainbutton.show();
+                mainbutton.onClick(() => {
+                    navigate("/orders");
+                });
+            } else {
+                mainbutton.hide();
+            }
+        }
+        // Если мы на странице заказов
+        else if (location.pathname === "/orders") {
+            mainbutton.setText("ORDER NOW");
             mainbutton.show();
             mainbutton.onClick(() => {
-                navigate("/orders");
+                navigate("/");
             });
-        } else {
-            mainbutton.hide();
         }
     }, [addedItemsCount, navigate, location.pathname]);
+    
     
 
     
