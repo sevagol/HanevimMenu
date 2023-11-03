@@ -4,18 +4,18 @@ import Milk from './assets/milk.svg';
 import { Button, Menu, MenuItem } from '@mui/material';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { styled } from '@mui/system';
 
-const theme = createTheme({
-    palette: {
-      primary: {
-        main: "#6024a1", // основной цвет для кнопок
-      },
-      secondary: {
-        main: '#da771a', // цвет текста
-      },
+
+const StyledToggleButton = styled(ToggleButton)({
+    color: 'orange',
+    '&.Mui-selected': {
+      backgroundColor: 'blue',
+      color: 'orange',
     },
   });
+  
+  
   
 
 type Order = {
@@ -82,7 +82,6 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
             </ul>
             <div className="total-price">Total: ${total.toFixed(2)}</div>
             <div className="toggle-container">
-            <ThemeProvider theme={theme}>
                 <ToggleButtonGroup
                     value={alignment}
                     exclusive
@@ -90,14 +89,13 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
                     aria-label="text alignment"
                     color="primary"
                 >
-                    <ToggleButton value="toGo" aria-label="left aligned">
+                    <StyledToggleButton value="toGo" aria-label="left aligned">
                         to go
-                    </ToggleButton>
-                    <ToggleButton value="here" aria-label="centered">
+                    </StyledToggleButton>
+                    <StyledToggleButton value="here" aria-label="centered">
                         here
-                    </ToggleButton>
+                    </StyledToggleButton>
                 </ToggleButtonGroup>
-                </ThemeProvider>
             </div>
         </div>
     );
