@@ -16,7 +16,9 @@ interface OrdersListProps {
 const backbutton = WebApp.BackButton;
 backbutton.show();
 backbutton.onClick(() => {
-    window.location.href = "/";
+    // Перенаправляем пользователя на главную страницу не обновляя ее
+    window.history.pushState({}, '', '/');
+    
 });
 
 
