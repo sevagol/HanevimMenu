@@ -27,21 +27,18 @@ const MenuItem: FC<ItemProps> = ({ orders, title, price, imgUrl, onAddChange }) 
     };
 
     const handleIncrease = () => {
-        const newCount = count + 1;
-        setCount(newCount);
-        onAddChange(title, true, newCount);
+        setCount(prevCount => prevCount + 1);
+        onAddChange(title, true, 1); // Только добавляем 1
     };
+    
     const handleDecrease = () => {
-        if (count === 1) {
-            setIsAdding(false);
-            setCount(0);
-            onAddChange(title, false, 0); // Измените здесь на false
-        } else {
-            const newCount = count - 1;
-            setCount(newCount);
-            onAddChange(title, false, newCount); // И измените здесь на false
-        }
+        setCount(prevCount => {
+            const newCount = prevCount - 1;
+            onAddChange(title, false, 1); // Только убираем 1
+            return newCount;
+        });
     };
+    
     
 
 
