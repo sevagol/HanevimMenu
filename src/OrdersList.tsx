@@ -71,7 +71,7 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders, alignment, setAlignment
             {orders.flatMap((order) => 
                     Array.from({ length: order.count }, (_, index) => (
                     <li key={index}>
-                        {order.title} x {order.count} - ₪{order.price.toFixed(2)}
+                        {order.title} - ₪{order.price.toFixed(2)}
                         {order.options && (
                             <>
                                 <Button className='svg-button' onClick={(e) => handleClick(e, index)}>
