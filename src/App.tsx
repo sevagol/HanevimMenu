@@ -133,12 +133,31 @@ const App = () => {
 
     const handleAddChange = (title: string, isAdded: boolean, count: number = 1) => {
         const menuItem = menuItems.find(item => item.title === title);
-        setAddedItemsCount(prevCount => isAdded ? prevCount + count : prevCount - count);
-
     
         setOrders((prevOrders) => {
-            if (isAdded) {
-                // Добавление нового заказа с уникальным id
+            // Находим индекс существующего заказа по названию
+            const existingOrderIndex = prevOrders.findIndex(order => order.title === title);
+    
+            // Если заказ уже существует
+            if (existingOrderIndex !== -1) {
+                // Копируем существующие заказы в новый массив
+                const newOrders = [...prevOrders];
+                // Если добавляем
+                if (isAdded) {
+                    // Увеличиваем количество
+                    newOrders[existingOrderIndex].count += count;
+                } else {
+                    // Если удаляем, и количество больше 1, уменьшаем количество
+                    if (newOrders[existingOrderIndex].count > 1) {
+                        newOrders[existingOrderIndex].count -= count;
+                    } else {
+                        // Если количество равно 1, удаляем элемент из массива
+                        newOrders.splice(existingOrderIndex, 1);
+                    }
+                }
+                return newOrders;
+            } else if (isAdded) {
+                // Если заказ не существует и мы добавляем, создаем новый заказ
                 const newOrder = {
                     id: `id-${Date.now()}-${Math.random()}`,
                     title,
@@ -147,12 +166,23 @@ const App = () => {
                     options: menuItem?.options
                 };
                 return [...prevOrders, newOrder];
+            }
+    
+            // Если заказ не существует и мы удаляем, просто возвращаем предыдущие заказы
+            return prevOrders;
+        });
+    
+        // Обновляем счетчик добавленных элементов
+        setAddedItemsCount(prevCount => {
+            if (isAdded) {
+                return prevCount + count;
             } else {
-                // Удаление заказа по id
-                return prevOrders.filter(order => order.title !== title || (order.title === title && order.count > 1));
+                // Убедитесь, что счетчик не уходит в отрицательные значения
+                return prevCount - count < 0 ? 0 : prevCount - count;
             }
         });
     };
+    
     
 
     return (
