@@ -31,7 +31,7 @@ const MainButtonLogic: React.FC<{ addedItemsCount: number, orders: { title: stri
                 orderText += ` (Option: ${order.option})`;
             }
             return orderText;
-        }).join('\n');
+        }).join('\n'); //ф
         
         const finalMessage = `Order Type: ${alignment === "toGo" ? "To Go" : "Here"}\n\n${orderInfo}`;
     
