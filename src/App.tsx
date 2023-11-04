@@ -24,14 +24,14 @@ const MainButtonLogic: React.FC<{ addedItemsCount: number, orders: { title: stri
     const TELEGRAM_TOKEN = "6958756705:AAFTQYV28jtGBu-Qa0ZkFf_6M1ZNGoX3EOg";
     const CHANNEL_ID = "-1002008195730";
 
-    const sendOrderToTelegram = (orders: { title: string; count: number; price: number; option?: string }[]) => {
+    const sendOrderToTelegram = (orders: { title: string; count: number; price: number; selectedOption?: string }[]) => {
         const orderInfo = orders.map(order => {
-            let orderText = `${order.title} - ${order.count}x`;
-            if (order.option) {
-                orderText += ` (Option: ${order.option})`;
-            }
-            return orderText;
-        }).join('\n'); //ф
+          let orderText = `${order.title} - ${order.count}x at ${order.price.toFixed(2)}`;
+          if (order.selectedOption) {
+            orderText += ` (Option: ${order.selectedOption})`;
+          }
+          return orderText;
+        }).join('\n'); // Склеиваем все строки заказа в один большой текст
         
         const finalMessage = `Order Type: ${alignment === "toGo" ? "To Go" : "Here"}\n\n${orderInfo}`;
     
@@ -115,7 +115,7 @@ const MainButtonLogic: React.FC<{ addedItemsCount: number, orders: { title: stri
 };
 const App = () => {
     const [addedItemsCount, setAddedItemsCount] = useState(0);
-    const [orders, setOrders] = useState<{ title: string; count: number; price: number }[]>([]);
+    const [orders, setOrders] = useState<{ id: string, title: string; count: number; price: number; options?: string[], selectedOption?: string }[]>([]);
     const [alignment, setAlignment] = useState<'toGo' | 'here'>('here');
 
 
@@ -131,42 +131,33 @@ const App = () => {
         { title: 'V60', price: 4.99, imgUrl: V60 },
     ];
 
-    const handleAddChange = (title: string, isAdded: boolean) => {
-        setAddedItemsCount((prevCount) => (isAdded ? prevCount + 1 : prevCount - 1));
-
+    const handleAddChange = (title: string, isAdded: boolean, count: number = 1) => {
         const menuItem = menuItems.find(item => item.title === title);
-
+    
         setOrders((prevOrders) => {
-            const existingOrder = prevOrders.find(order => order.title === title);
-
             if (isAdded) {
-                if (existingOrder) {
-                    return prevOrders.map(order =>
-                        order.title === title
-                            ? { ...order, count: order.count + 1 }
-                            : order);
-                } else {
-                    return [...prevOrders, { title, count: 1, price: menuItem?.price || 0, options: menuItem?.options }];
-                }
+                // Добавление нового заказа с уникальным id
+                const newOrder = {
+                    id: `id-${Date.now()}-${Math.random()}`,
+                    title,
+                    count,
+                    price: menuItem?.price || 0,
+                    options: menuItem?.options
+                };
+                return [...prevOrders, newOrder];
             } else {
-                if (existingOrder?.count === 1) {
-                    return prevOrders.filter(order => order.title !== title);
-                } else if (existingOrder) {
-                    return prevOrders.map(order =>
-                        order.title === title
-                            ? { ...order, count: order.count - 1 }
-                            : order);
-                }
-                return prevOrders;
+                // Удаление заказа по id
+                return prevOrders.filter(order => order.title !== title || (order.title === title && order.count > 1));
             }
         });
     };
+    
 
     return (
         <Router>
             <MainButtonLogic addedItemsCount={addedItemsCount} orders={orders} alignment={alignment} />
             <Routes>
-            <Route path="/orders" element={<OrdersList orders={orders} alignment={alignment} setAlignment={setAlignment} />} />
+            <Route path="/orders" element={<OrdersList orders={orders} alignment={alignment} setAlignment={setAlignment} setOrders={setOrders}/>} />
                 <Route path="/" element={
                     <div className="menu-container">
                         <Grid container spacing={0.5}>
