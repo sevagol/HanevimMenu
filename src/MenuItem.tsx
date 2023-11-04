@@ -32,12 +32,16 @@ const MenuItem: FC<ItemProps> = ({ orders, title, price, imgUrl, onAddChange }) 
     };
     
     const handleDecrease = () => {
-        setCount(prevCount => {
+        setCount((prevCount) => {
             const newCount = prevCount - 1;
-            onAddChange(title, false, 1); // Только убираем 1
+            if (newCount <= 0) {
+                setIsAdding(false); // Если количество равно 0, меняем isAdding на false
+            }
+            onAddChange(title, false, 1); // Обновляем количество в заказе
             return newCount;
         });
     };
+    
     
     
 
