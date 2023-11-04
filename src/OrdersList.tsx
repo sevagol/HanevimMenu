@@ -68,7 +68,8 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders, alignment, setAlignment
         <div className="orders-container">
             <h2>Your Orders:</h2>
             <ul>
-                {orders.map((order, index) => (
+            {orders.flatMap((order) => 
+                    Array.from({ length: order.count }, (_, index) => (
                     <li key={index}>
                         {order.title} x {order.count} - ₪{order.price.toFixed(2)}
                         {order.options && (
@@ -90,6 +91,7 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders, alignment, setAlignment
                             </>
                         )}
                     </li>
+                    )
                 ))}
             </ul>
             <div className="total-price">Total: ${total.toFixed(2)}</div>
