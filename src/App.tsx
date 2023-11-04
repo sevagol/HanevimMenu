@@ -133,6 +133,8 @@ const App = () => {
 
     const handleAddChange = (title: string, isAdded: boolean, count: number = 1) => {
         const menuItem = menuItems.find(item => item.title === title);
+        setAddedItemsCount(prevCount => isAdded ? prevCount + count : prevCount - count);
+
     
         setOrders((prevOrders) => {
             if (isAdded) {
