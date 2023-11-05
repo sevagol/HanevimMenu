@@ -146,6 +146,7 @@ const App = () => {
                     title,
                     count,
                     price: menuItem?.price || 0,
+                    options: menuItem?.options,
                     selectedOption,
                 };
                 return [...prevOrders, newOrder]; // Добавляем новый заказ в массив
