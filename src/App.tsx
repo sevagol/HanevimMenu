@@ -66,7 +66,12 @@ const MainButtonLogic: React.FC<{
         }
         // Если мы на странице заказов
         else if (location.pathname === "/orders") {
-            sendOrderToTelegram(orders);
+            WebApp.showConfirm("Do you want to place an order?", (confirmed) => {
+                if (confirmed) {
+                    sendOrderToTelegram(orders);
+                    WebApp.close();
+                }})
+            
         }
     }, [navigate, location.pathname, orders]);
 
