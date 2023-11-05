@@ -17,6 +17,7 @@ import WebApp from '@twa-dev/sdk';
 import { Grid } from '@mui/material';
 import { useCallback } from 'react';
 
+WebApp.setBackgroundColor('#f9f8f8eb');
 const MainButtonLogic: React.FC<{
     addedItemsCount: number,
     orders: { id: string, title: string; count: number; price: number; selectedOption?: string }[],
