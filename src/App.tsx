@@ -69,7 +69,9 @@ const MainButtonLogic: React.FC<{
             WebApp.showConfirm("Do you want to place an order?", (confirmed) => {
                 if (confirmed) {
                     sendOrderToTelegram(orders);
+                    alert("Your order has been placed!");
                     WebApp.close();
+
                 }})
             
         }
