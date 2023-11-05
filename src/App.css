@@ -3,7 +3,7 @@
 }
 
 body {
-  background-color: #282c34;
+  background-color: #558cac;
 }
 
 .grid-container {
@@ -66,4 +66,5 @@ body {
     transform: scale(0.7); /* Уменьшение на 30% для экранов меньше 480px */
   }
 }
+
 
