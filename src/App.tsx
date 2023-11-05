@@ -30,7 +30,7 @@ const MainButtonLogic: React.FC<{
 
     const sendOrderToTelegram = (orders: { id: string; title: string; count: number; price: number; selectedOption?: string }[]) => {
         const orderInfo = orders.map(order => {
-          let orderText = `${order.id} ${order.title} - ${order.count}x at ${(order.price * order.count).toFixed(2)}`;
+          let orderText = `${order.title} - ${order.count}x at ${(order.price * order.count).toFixed(2)}`;
           if (order.selectedOption) {
             orderText += ` (Option: ${order.selectedOption})`;
           }
@@ -135,43 +135,36 @@ const App = () => {
 
     const handleAddChange = (title: string, isAdded: boolean, count: number = 1, selectedOption?: string) => {
         const menuItem = menuItems.find(item => item.title === title);
-    
+        
+        // Обновляем заказы
         setOrders((prevOrders) => {
-            // Находим индекс существующего заказа по названию и выбранной опции
-            const existingOrderIndex = prevOrders.findIndex(order => order.title === title && order.selectedOption === selectedOption);
-    
-            // Если заказ уже существует с такой же опцией
-            if (existingOrderIndex !== -1) {
-                // Копируем существующие заказы в новый массив
-                const newOrders = [...prevOrders];
-                // Увеличиваем или уменьшаем количество
-                if (isAdded) {
-                    newOrders[existingOrderIndex].count += count;
-                } else {
-                    if (newOrders[existingOrderIndex].count > 1) {
-                        newOrders[existingOrderIndex].count -= count;
-                    } else {
-                        newOrders.splice(existingOrderIndex, 1);
-                    }
-                }
-                return newOrders;
-            } else if (isAdded) {
-                // Если заказ не существует с данной опцией, создаем новый заказ
+            // Если добавляем товар
+            if (isAdded) {
+                // Создаем новый заказ
                 const newOrder = {
                     id: `id-${Date.now()}-${Math.random()}`,
                     title,
                     count,
                     price: menuItem?.price || 0,
-                    options: menuItem?.options,
                     selectedOption,
                 };
-                return [...prevOrders, newOrder];
+                return [...prevOrders, newOrder]; // Добавляем новый заказ в массив
+            } else {
+                // Если удаляем товар, находим первый подходящий и уменьшаем количество или удаляем заказ
+                const orderIndex = prevOrders.findIndex(order => order.title === title && order.selectedOption === selectedOption);
+                if (orderIndex !== -1) {
+                    const newOrders = [...prevOrders];
+                    if (newOrders[orderIndex].count > 1) {
+                        newOrders[orderIndex].count -= count;
+                    } else {
+                        newOrders.splice(orderIndex, 1);
+                    }
+                    return newOrders;
+                }
             }
-    
-            // Если заказ не существует и мы удаляем, просто возвращаем предыдущие заказы
-            return prevOrders;
+            return prevOrders; // Если ничего не добавляем и не удаляем, возвращаем предыдущие заказы
         });
-    
+        
         // Обновляем счетчик добавленных элементов
         setAddedItemsCount(prevCount => {
             if (isAdded) {
@@ -181,6 +174,7 @@ const App = () => {
             }
         });
     };
+    
     
     
     
