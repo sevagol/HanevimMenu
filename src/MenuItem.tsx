@@ -2,6 +2,7 @@ import { FC, useState } from 'react';
 import { Card, CardContent, CardMedia, Typography, Button, Grid, IconButton, Box } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import WebApp from '@twa-dev/sdk';
 
 interface ItemProps {
     title: string;
@@ -24,6 +25,7 @@ const MenuItem: FC<ItemProps> = ({ orders, title, price, imgUrl, onAddChange }) 
         setIsAdding(true);
         setCount(1);
         onAddChange(title, true, 1);
+        WebApp.HapticFeedback.impactOccurred( 'medium' );
     };
 
     const handleIncrease = () => {
