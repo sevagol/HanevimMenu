@@ -17,28 +17,31 @@ import WebApp from '@twa-dev/sdk';
 import { Grid } from '@mui/material';
 import { useCallback } from 'react';
 
-const MainButtonLogic: React.FC<{ addedItemsCount: number, orders: { title: string; count: number; price: number }[], alignment: 'toGo' | 'here' }> = ({ addedItemsCount, orders, alignment }) => {
-    const location = useLocation();
+const MainButtonLogic: React.FC<{
+    addedItemsCount: number,
+    orders: { id: string, title: string; count: number; price: number; selectedOption?: string }[],
+    alignment: 'toGo' | 'here'
+  }> = ({ addedItemsCount, orders, alignment }) => {    const location = useLocation();
     const navigate = useNavigate();
 
 
     const TELEGRAM_TOKEN = "6958756705:AAFTQYV28jtGBu-Qa0ZkFf_6M1ZNGoX3EOg";
     const CHANNEL_ID = "-1002008195730";
 
-    const sendOrderToTelegram = (orders: { title: string; count: number; price: number; selectedOption?: string }[]) => {
+    const sendOrderToTelegram = (orders: { id: string; title: string; count: number; price: number; selectedOption?: string }[]) => {
         const orderInfo = orders.map(order => {
-          let orderText = `${order.title} - ${order.count}x at ${order.price.toFixed(2)}`;
+          let orderText = `${order.title} - ${order.count}x at ${(order.price * order.count).toFixed(2)}`;
           if (order.selectedOption) {
             orderText += ` (Option: ${order.selectedOption})`;
           }
           return orderText;
-        }).join('\n'); // Склеиваем все строки заказа в один большой текст
+        }).join('\n'); // Каждый заказ отображается отдельной строкой
         
         const finalMessage = `Order Type: ${alignment === "toGo" ? "To Go" : "Here"}\n\n${orderInfo}`;
-    
+        
         const baseURL = `https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`;
         const messageText = `New Order:\n\n${finalMessage}`;
-
+      
         fetch(baseURL, {
             method: "POST",
             headers: {
@@ -49,7 +52,8 @@ const MainButtonLogic: React.FC<{ addedItemsCount: number, orders: { title: stri
                 text: messageText
             })
         });
-    }
+      }
+      
 
     const handleBackClick = useCallback(() => {
         navigate("/"); // Вместо window.history.back()
@@ -129,7 +133,7 @@ const App = () => {
         { title: 'V60', price: 4.99, imgUrl: V60 },
     ];
 
-    const handleAddChange = (title: string, isAdded: boolean, count: number = 1) => {
+    const handleAddChange = (title: string, isAdded: boolean, count: number = 1, selectedOption?: string) => {
         const menuItem = menuItems.find(item => item.title === title);
     
         setOrders((prevOrders) => {
@@ -161,7 +165,8 @@ const App = () => {
                     title,
                     count,
                     price: menuItem?.price || 0,
-                    options: menuItem?.options
+                    options: menuItem?.options,
+                    selectedOption,
                 };
                 return [...prevOrders, newOrder];
             }
