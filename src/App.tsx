@@ -30,7 +30,7 @@ const MainButtonLogic: React.FC<{
 
     const sendOrderToTelegram = (orders: { id: string; title: string; count: number; price: number; selectedOption?: string }[]) => {
         const orderInfo = orders.map(order => {
-          let orderText = `${order.title} - ${order.count}x at ${(order.price * order.count).toFixed(2)}`;
+          let orderText = `${order.id} ${order.title} - ${order.count}x at ${(order.price * order.count).toFixed(2)}`;
           if (order.selectedOption) {
             orderText += ` (Option: ${order.selectedOption})`;
           }
