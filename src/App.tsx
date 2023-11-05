@@ -15,6 +15,7 @@ import V60 from './assets/v60.svg';
 import './App.css';
 import WebApp from '@twa-dev/sdk';
 import { Grid } from '@mui/material';
+import { useCallback } from 'react';
 
 const MainButtonLogic: React.FC<{ addedItemsCount: number, orders: { title: string; count: number; price: number }[], alignment: 'toGo' | 'here' }> = ({ addedItemsCount, orders, alignment }) => {
     const location = useLocation();
@@ -50,66 +51,63 @@ const MainButtonLogic: React.FC<{ addedItemsCount: number, orders: { title: stri
         });
     }
 
+    const handleBackClick = useCallback(() => {
+        navigate("/"); // Вместо window.history.back()
+    }, [navigate]);
+
+    const handleMainButtonClick = useCallback(() => {
+        // Если мы на главной странице
+        if (location.pathname === "/") {
+            navigate("/orders");
+        }
+        // Если мы на странице заказов
+        else if (location.pathname === "/orders") {
+            sendOrderToTelegram(orders);
+        }
+    }, [navigate, location.pathname, orders]);
+
 
     // useEffect для обработки нажатия кнопки "назад"
     useEffect(() => {
         const backbutton = WebApp.BackButton;
-
-        const handleBackClick = () => {
-            navigate("/"); // Вместо window.history.back()
-        };
 
         if (location.pathname === "/orders") {
             backbutton.show();
             backbutton.onClick(handleBackClick);
         } else {
             backbutton.hide();
-            backbutton.offClick(handleBackClick); // Убедимся, что обработчик отключен, когда мы не находимся на странице заказов
         }
 
-        return () => {
-            backbutton.offClick(handleBackClick); // Отключаем обработчик при размонтировании
-        };
+        // Отключаем обработчик при размонтировании
+        return () => backbutton.offClick(handleBackClick);
 
-    }, [location.pathname, navigate]);
+    }, [location.pathname, handleBackClick]);
 
     // Отдельный useEffect для логики MainButton
     useEffect(() => {
         const mainbutton = WebApp.MainButton;
 
-        // Если мы на главной странице
-        if (location.pathname === "/") {
-            mainbutton.setParams({
-                color: '#1E83DB'
-            });
+        mainbutton.setParams({
+            color: location.pathname === "/" ? '#1E83DB' : '#24c46a'
+        });
 
-            // Показываем кнопку "VIEW ORDER" если есть добавленные товары, иначе скрываем ее
-            if (addedItemsCount > 0) {
-                mainbutton.setText("VIEW ORDER");
-                mainbutton.show();
-                mainbutton.onClick(() => {
-                    navigate("/orders");
-                });
-            } else {
-                mainbutton.hide();
-            }
-        }
-        // Если мы на странице заказов
-        else if (location.pathname === "/orders") {
-            mainbutton.setParams({
-                color: '#24c46a'
-            });
+        // Показываем кнопку "VIEW ORDER" если есть добавленные товары, иначе скрываем ее
+        if (location.pathname === "/" && addedItemsCount > 0) {
+            mainbutton.setText("VIEW ORDER");
+            mainbutton.show();
+        } else if (location.pathname === "/orders") {
             mainbutton.setText("ORDER NOW");
             mainbutton.show();
-            mainbutton.onClick(() => {
-                sendOrderToTelegram(orders);
-            });
-
+        } else {
+            mainbutton.hide();
         }
-    }, [addedItemsCount, navigate, location.pathname]);
 
+        mainbutton.onClick(handleMainButtonClick);
 
+        // Отключаем обработчик при размонтировании
+        return () => mainbutton.offClick(handleMainButtonClick);
 
+    }, [location.pathname, addedItemsCount, handleMainButtonClick]);
 
     return null;
 };
