@@ -137,29 +137,26 @@ const App = () => {
         const menuItem = menuItems.find(item => item.title === title);
     
         setOrders((prevOrders) => {
-            // Находим индекс существующего заказа по названию
-            const existingOrderIndex = prevOrders.findIndex(order => order.title === title);
+            // Находим индекс существующего заказа по названию и выбранной опции
+            const existingOrderIndex = prevOrders.findIndex(order => order.title === title && order.selectedOption === selectedOption);
     
-            // Если заказ уже существует
+            // Если заказ уже существует с такой же опцией
             if (existingOrderIndex !== -1) {
                 // Копируем существующие заказы в новый массив
                 const newOrders = [...prevOrders];
-                // Если добавляем
+                // Увеличиваем или уменьшаем количество
                 if (isAdded) {
-                    // Увеличиваем количество
                     newOrders[existingOrderIndex].count += count;
                 } else {
-                    // Если удаляем, и количество больше 1, уменьшаем количество
                     if (newOrders[existingOrderIndex].count > 1) {
                         newOrders[existingOrderIndex].count -= count;
                     } else {
-                        // Если количество равно 1, удаляем элемент из массива
                         newOrders.splice(existingOrderIndex, 1);
                     }
                 }
                 return newOrders;
             } else if (isAdded) {
-                // Если заказ не существует и мы добавляем, создаем новый заказ
+                // Если заказ не существует с данной опцией, создаем новый заказ
                 const newOrder = {
                     id: `id-${Date.now()}-${Math.random()}`,
                     title,
@@ -180,11 +177,11 @@ const App = () => {
             if (isAdded) {
                 return prevCount + count;
             } else {
-                // Убедитесь, что счетчик не уходит в отрицательные значения
                 return prevCount - count < 0 ? 0 : prevCount - count;
             }
         });
     };
+    
     
     
 
