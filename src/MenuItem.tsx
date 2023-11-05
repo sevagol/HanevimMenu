@@ -29,11 +29,13 @@ const MenuItem: FC<ItemProps> = ({ orders, title, price, imgUrl, onAddChange }) 
     };
 
     const handleIncrease = () => {
+        WebApp.HapticFeedback.impactOccurred( 'light' );
         setCount(prevCount => prevCount + 1);
         onAddChange(title, true, 1); // Только добавляем 1
     };
     
     const handleDecrease = () => {
+        WebApp.HapticFeedback.impactOccurred( 'light' );
         setCount((prevCount) => {
             const newCount = prevCount - 1;
             if (newCount <= 0) {
