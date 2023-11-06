@@ -91,34 +91,46 @@ const MenuItem: FC<ItemProps> = ({ orders, title, price, imgUrl, onAddChange }) 
                 p: 1,
                 mt: -1,
             }}>
-                <Typography gutterBottom variant="h6" component="div" sx={{ color: 'white', fontSize: '1rem' }}>
+                <Typography gutterBottom variant="h6" component="div" sx={{ color: 'black', fontSize: '1rem' }}>
                     {title}
                 </Typography>
-                <Typography variant="body2" color="white">
+                <Typography variant="body2" color="black">
                     ₪{price.toFixed(2)}
                 </Typography>
                 {!isAdding ? (
-                    <Button variant="contained" onClick={handleAddClick} sx={{ mt: 2 }}>Add</Button>
+                    <Button variant="contained" onClick={handleAddClick} sx={{
+                        mt: 2,
+                        backgroundColor: 'white',
+                        color: 'black',
+                        border: '2px solid black', // Добавляем черную рамку
+                        '&:hover': {
+                          backgroundColor: 'white',
+                          borderColor: 'black', // Цвет рамки при наведении
+                        },
+                      }}>Add</Button>
                 ) : (
                     <Grid container spacing={1} alignItems="center" justifyContent="center" sx={{ mt: 2 }}>
                         <Grid item>
                             <IconButton size="small" onClick={handleDecrease}
                                 sx={{
-                                    backgroundColor: 'orange',
+                                    backgroundColor: 'white',
+                                    color: 'black',
+                                    border: '2px solid black',
                                     borderRadius: '4px',
-                                    '&:hover': { backgroundColor: 'darkorange' }
                                 }}>
-                                <RemoveIcon style={{ color: 'white' }} />
+                                <RemoveIcon style={{ color: 'black' }} />
                             </IconButton>
                         </Grid>
                         <Grid item>
                             <IconButton size="small" onClick={handleIncrease}
-                                sx={{
-                                    backgroundColor: 'green',
+                                 sx={{
+                                    backgroundColor: 'white',
+                                    color: 'black',
+                                    border: '2px solid black',
                                     borderRadius: '4px',
-                                    '&:hover': { backgroundColor: 'darkgreen' }
+                        
                                 }}>
-                                <AddIcon style={{ color: 'white' }} />
+                                <AddIcon style={{ color: 'black' }} />
                             </IconButton>
                         </Grid>
                     </Grid>
@@ -130,4 +142,3 @@ const MenuItem: FC<ItemProps> = ({ orders, title, price, imgUrl, onAddChange }) 
 };
 
 export default MenuItem;
-
