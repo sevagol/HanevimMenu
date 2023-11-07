@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import "./OrdersList.css";
-import Milk from './assets/milk.svg';
+import Milk from './assets/MILK-2.svg';
 import { Button, Menu, MenuItem } from '@mui/material';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
