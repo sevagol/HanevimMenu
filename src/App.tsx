@@ -146,11 +146,11 @@ const App = () => {
         { title: 'Matcha', price: 4.99, imgUrl: Matcha },
         { title: 'V60', price: 4.99, imgUrl: V60 },
         { title: 'Bumble', price: 4.99, imgUrl: Bumble },
-        { title: 'Espresso tonic', price: 4.99, imgUrl: Etonic },
+        { title: 'Esp. tonic', price: 4.99, imgUrl: Etonic },
         { title: 'Iced latte', price: 4.99, imgUrl: Ilatte },
-        { title: 'Iced matcha latte', price: 4.99, imgUrl: Imatcha },
+        { title: 'Iced m latte', price: 4.99, imgUrl: Imatcha },
         { title: 'Lemonade', price: 4.99, imgUrl: Lemonade },
-        { title: 'Matcha tonic', price: 4.99, imgUrl: Mtonic },
+        { title: 'M tonic', price: 4.99, imgUrl: Mtonic },
         { title: 'Vitamin C', price: 4.99, imgUrl: VC },
     ];
 
@@ -201,6 +201,7 @@ const App = () => {
     
 
     return (
+        
         <Router>
             <MainButtonLogic addedItemsCount={addedItemsCount} orders={orders} alignment={alignment} />
             <Routes>
