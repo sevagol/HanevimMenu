@@ -9,9 +9,16 @@ import Espresso from './assets/ESPRESSO-2.svg';
 import FlatWhite from './assets/FLAT WHITE.svg';
 import Latte from './assets/LATTE-2.svg';
 import filter from './assets/FILTER-2.svg';
-import Juice from './assets/ORANGE JUICE.svg';
+import Juice from './assets/orange juice-2.svg';
 import Matcha from './assets/MATCHA-2.svg';
 import V60 from './assets/V 60.svg';
+import Bumble from './assets/bumble-2.svg';
+import Etonic from './assets/espresso tonic-2.svg';
+import Ilatte from './assets/ice latte-2.svg';
+import Imatcha from './assets/ice matcha latte-2.svg';
+import Lemonade from './assets/lemonade-2.svg';
+import Mtonic from './assets/matcha tonic-2.svg';
+import VC from './assets/vitamin c-2.svg'
 import './App.css';
 import WebApp from '@twa-dev/sdk';
 import { Grid } from '@mui/material';
@@ -138,6 +145,13 @@ const App = () => {
         { title: 'Juice', price: 4.99, imgUrl: Juice },
         { title: 'Matcha', price: 4.99, imgUrl: Matcha },
         { title: 'V60', price: 4.99, imgUrl: V60 },
+        { title: 'Bumble', price: 4.99, imgUrl: Bumble },
+        { title: 'Espresso tonic', price: 4.99, imgUrl: Etonic },
+        { title: 'Iced latte', price: 4.99, imgUrl: Ilatte },
+        { title: 'Iced matcha latte', price: 4.99, imgUrl: Imatcha },
+        { title: 'Lemonade', price: 4.99, imgUrl: Lemonade },
+        { title: 'Matcha tonic', price: 4.99, imgUrl: Mtonic },
+        { title: 'Vitamin C', price: 4.99, imgUrl: VC },
     ];
 
     const handleAddChange = (title: string, isAdded: boolean, count: number = 1, selectedOption?: string) => {

@@ -3,6 +3,7 @@ import { Card, CardContent, CardMedia, Typography, Button, Grid, IconButton, Box
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import WebApp from '@twa-dev/sdk';
+import './font.css';
 
 interface ItemProps {
     title: string;
@@ -54,7 +55,7 @@ const MenuItem: FC<ItemProps> = ({ orders, title, price, imgUrl, onAddChange }) 
         <Card sx={{
             position: 'relative',
             width: '100%',       // Установите ширину на 100% контейнера
-            height: 400,         // Установите фиксированную высоту для всех карточек, например, 400px
+            height: 300,         // Установите фиксированную высоту для всех карточек, например, 400px
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -65,7 +66,7 @@ const MenuItem: FC<ItemProps> = ({ orders, title, price, imgUrl, onAddChange }) 
 
             {count > 0 && (
                 <Box sx={{ position: 'absolute', top: 0, right: 0, mt: 1, mr: 1 }}>
-                    <Typography variant="h6" color="white">{count}</Typography>
+                    <Typography variant="h6" color="black">{count}</Typography>
                 </Box>
             )}
             <CardMedia
@@ -91,10 +92,10 @@ const MenuItem: FC<ItemProps> = ({ orders, title, price, imgUrl, onAddChange }) 
                 p: 1,
                 mt: -1,
             }}>
-                <Typography gutterBottom variant="h6" component="div" sx={{ color: 'black', fontSize: '1rem' }}>
+                <Typography gutterBottom variant="h6" component="div" sx={{ color: 'black', fontSize: '1rem', fontFamily:'Poppins' }}>
                     {title}
                 </Typography>
-                <Typography variant="body2" color="black">
+                <Typography variant="body2" color="black" sx={{ color: 'black', fontSize: '1rem', fontFamily:'Poppins' }}>
                     ₪{price.toFixed(2)}
                 </Typography>
                 {!isAdding ? (
