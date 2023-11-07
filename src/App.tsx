@@ -136,22 +136,22 @@ const App = () => {
 
 
     const menuItems = [
-        { title: 'Cappucino', price: 4.99, imgUrl: Cappucino, options: ['Soy', 'Almond', 'Oat', 'Regular'] },
-        { title: 'Cortado', price: 5.99, imgUrl: Cortado, options: ['Soy', 'Almond', 'Oat', 'Regular'] },
-        { title: 'Espresso', price: 2.99, imgUrl: Espresso },
-        { title: 'Flat White', price: 4.99, imgUrl: FlatWhite, options: ['Soy', 'Almond', 'Oat', 'Regular'] },
-        { title: 'Latte', price: 4.99, imgUrl: Latte, options: ['Soy', 'Almond', 'Oat', 'Regular'] },
-        { title: 'Filter', price: 4.99, imgUrl: filter },
-        { title: 'Juice', price: 4.99, imgUrl: Juice },
-        { title: 'Matcha', price: 4.99, imgUrl: Matcha },
-        { title: 'V60', price: 4.99, imgUrl: V60 },
-        { title: 'Bumble', price: 4.99, imgUrl: Bumble },
-        { title: 'Esp. tonic', price: 4.99, imgUrl: Etonic },
-        { title: 'Iced latte', price: 4.99, imgUrl: Ilatte },
-        { title: 'Ice M latte', price: 4.99, imgUrl: Imatcha },
-        { title: 'Lemonade', price: 4.99, imgUrl: Lemonade },
-        { title: 'M tonic', price: 4.99, imgUrl: Mtonic },
-        { title: 'Vitamin C', price: 4.99, imgUrl: VC },
+        { title: 'Cappucino', price: 14, imgUrl: Cappucino, options: ['Soy', 'Almond', 'Oat', 'Regular'] },
+        { title: 'Cortado', price: 14, imgUrl: Cortado, options: ['Soy', 'Almond', 'Oat', 'Regular'] },
+        { title: 'Espresso', price: 12, imgUrl: Espresso },
+        { title: 'Flat White', price: 15, imgUrl: FlatWhite, options: ['Soy', 'Almond', 'Oat', 'Regular'] },
+        { title: 'Latte', price: 16, imgUrl: Latte, options: ['Soy', 'Almond', 'Oat', 'Regular'] },
+        { title: 'Filter', price: 15, imgUrl: filter },
+        { title: 'Juice', price: 20, imgUrl: Juice },
+        { title: 'Matcha', price: 18, imgUrl: Matcha },
+        { title: 'V60', price: 20, imgUrl: V60 },
+        { title: 'Bumble', price: 20, imgUrl: Bumble },
+        { title: 'Esp. tonic', price: 18, imgUrl: Etonic },
+        { title: 'Iced latte', price: 18, imgUrl: Ilatte },
+        { title: 'Ice M latte', price: 18, imgUrl: Imatcha },
+        { title: 'Lemonade', price: 18, imgUrl: Lemonade },
+        { title: 'M tonic', price: 18, imgUrl: Mtonic },
+        { title: 'Vitamin C', price: 22, imgUrl: VC },
     ];
 
     const handleAddChange = (title: string, isAdded: boolean, count: number = 1, selectedOption?: string) => {
