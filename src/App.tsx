@@ -106,7 +106,7 @@ const MainButtonLogic: React.FC<{
         const mainbutton = WebApp.MainButton;
 
         mainbutton.setParams({
-            color: location.pathname === "/" ? '#1E83DB' : '#24c46a'
+            color: location.pathname === "/" ? '#000000' : '#000000'
         });
 
         // Показываем кнопку "VIEW ORDER" если есть добавленные товары, иначе скрываем ее
