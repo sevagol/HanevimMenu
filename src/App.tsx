@@ -148,7 +148,7 @@ const App = () => {
         { title: 'Bumble', price: 4.99, imgUrl: Bumble },
         { title: 'Esp. tonic', price: 4.99, imgUrl: Etonic },
         { title: 'Iced latte', price: 4.99, imgUrl: Ilatte },
-        { title: 'Iced m latte', price: 4.99, imgUrl: Imatcha },
+        { title: 'Ice M latte', price: 4.99, imgUrl: Imatcha },
         { title: 'Lemonade', price: 4.99, imgUrl: Lemonade },
         { title: 'M tonic', price: 4.99, imgUrl: Mtonic },
         { title: 'Vitamin C', price: 4.99, imgUrl: VC },

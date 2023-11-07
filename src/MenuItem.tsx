@@ -95,7 +95,7 @@ const MenuItem: FC<ItemProps> = ({ orders, title, price, imgUrl, onAddChange }) 
                 <Typography gutterBottom variant="h6" component="div" sx={{ color: 'black', fontSize: '1rem', fontFamily:'Poppins' }}>
                     {title}
                 </Typography>
-                <Typography variant="body2" color="black" sx={{ color: 'black', fontSize: '1rem', fontFamily:'Poppins' }}>
+                <Typography variant="body2" color="black" sx={{ color: 'black', fontSize: '0.8rem', fontFamily:'Poppins' }}>
                     ₪{price.toFixed(2)}
                 </Typography>
                 {!isAdding ? (
