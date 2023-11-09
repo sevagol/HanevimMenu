@@ -105,7 +105,7 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders, alignment, setAlignment
                     ))
                 )}
             </ul>
-            <div className="total-price">Total: ${total.toFixed(2)}</div>
+            <div className="total-price">Total: ₪{total.toFixed(2)}</div>
             <div className="toggle-container">
                 <ToggleButtonGroup
                     value={alignment}
