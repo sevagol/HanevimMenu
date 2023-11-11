@@ -3,26 +3,53 @@ import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-route
 import { useLocation } from 'react-router-dom';
 import MenuItem from './MenuItem';
 import OrdersList from './OrdersList';
-import Cappucino from './assets/CAPPUCCINO.svg';
-import Cortado from './assets/CORTADO-2.svg';
-import Espresso from './assets/ESPRESSO-2.svg';
-import FlatWhite from './assets/FLAT WHITE.svg';
-import Latte from './assets/LATTE-2.svg';
-import filter from './assets/FILTER-2.svg';
-import Juice from './assets/orange juice-2.svg';
-import Matcha from './assets/MATCHA-2.svg';
-import V60 from './assets/V 60.svg';
-import Bumble from './assets/bumble-2.svg';
-import Etonic from './assets/espresso tonic-2.svg';
-import Ilatte from './assets/ice latte-2.svg';
-import Imatcha from './assets/ice matcha latte-2.svg';
-import Lemonade from './assets/lemonade-2.svg';
-import Mtonic from './assets/matcha tonic-2.svg';
-import VC from './assets/vitamin c-2.svg'
+// import Cappucino from './assets/CAPPUCCINO.svg';
+// import Cortado from './assets/CORTADO-2.svg';
+// import Espresso from './assets/ESPRESSO-2.svg';
+// import FlatWhite from './assets/FLAT WHITE.svg';
+// import Latte from './assets/LATTE-2.svg';
+// import filter from './assets/FILTER-2.svg';
+// import Juice from './assets/orange juice-2.svg';
+// import Matcha from './assets/MATCHA-2.svg';
+// import V60 from './assets/V 60.svg';
+// import Bumble from './assets/bumble-2.svg';
+// import Etonic from './assets/espresso tonic-2.svg';
+// import Ilatte from './assets/ice latte-2.svg';
+// import Imatcha from './assets/ice matcha latte-2.svg';
+// import Lemonade from './assets/lemonade-2.svg';
+// import Mtonic from './assets/matcha tonic-2.svg';
+// import VC from './assets/vitamin c-2.svg'
 import './App.css';
 import WebApp from '@twa-dev/sdk';
 import { Grid } from '@mui/material';
 import { useCallback } from 'react';
+import { getFirestore } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
+
+
+
+
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyAgIIof3E7rTJ_MysoXHHGTESLtD9vavCw",
+  authDomain: "menu-89271.firebaseapp.com",
+  projectId: "menu-89271",
+//   databaseURL: "https://menu-89271.firebaseio.com",
+  storageBucket: "menu-89271.appspot.com",
+  messagingSenderId: "55850687910",
+  appId: "1:55850687910:web:5c6305c2269e95d6510367"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const firestore = getFirestore(app);
+
 
 const MainButtonLogic: React.FC<{
     addedItemsCount: number,
@@ -130,29 +157,53 @@ const MainButtonLogic: React.FC<{
     return null;
 };
 const App = () => {
+    const [menuItems, setMenuItems] = useState<MenuItemType[]>([]);
+
+interface MenuItemType {
+  title: string;
+  price: number;
+  imgUrl: string;
+  options?: string[];
+}
+
     const [addedItemsCount, setAddedItemsCount] = useState(0);
     const [orders, setOrders] = useState<{ id: string, title: string; count: number; price: number; options?: string[], selectedOption?: string }[]>([]);
     const [alignment, setAlignment] = useState<'toGo' | 'here'>('here');
+   
+    useEffect(() => {
+        const fetchMenuItems = async () => {
+          const productsCollection = collection(firestore, "products");
+          const querySnapshot = await getDocs(productsCollection);
+          const productsData: MenuItemType[] = []; // Явно указываем тип Product[]
+          querySnapshot.forEach((doc) => {
+            productsData.push(doc.data() as MenuItemType); // Приводим данные к типу Product
+          });
+          setMenuItems(productsData);
+        };
+      
+        fetchMenuItems();
+      }, []);
+    
 
 
-    const menuItems = [
-        { title: 'Cappucino', price: 14, imgUrl: Cappucino, options: ['Soy', 'Almond', 'Oat', 'Regular'] },
-        { title: 'Cortado', price: 14, imgUrl: Cortado, options: ['Soy', 'Almond', 'Oat', 'Regular'] },
-        { title: 'Espresso', price: 12, imgUrl: Espresso },
-        { title: 'Flat White', price: 15, imgUrl: FlatWhite, options: ['Soy', 'Almond', 'Oat', 'Regular'] },
-        { title: 'Latte', price: 16, imgUrl: Latte, options: ['Soy', 'Almond', 'Oat', 'Regular'] },
-        { title: 'Filter', price: 15, imgUrl: filter },
-        { title: 'Juice', price: 20, imgUrl: Juice },
-        { title: 'Matcha', price: 18, imgUrl: Matcha },
-        { title: 'V60', price: 20, imgUrl: V60 },
-        { title: 'Bumble', price: 20, imgUrl: Bumble },
-        { title: 'Esp. tonic', price: 18, imgUrl: Etonic },
-        { title: 'Iced latte', price: 18, imgUrl: Ilatte },
-        { title: 'Ice M latte', price: 18, imgUrl: Imatcha },
-        { title: 'Lemonade', price: 18, imgUrl: Lemonade },
-        { title: 'M tonic', price: 18, imgUrl: Mtonic },
-        { title: 'Vitamin C', price: 22, imgUrl: VC },
-    ];
+    // const menuItems = [
+    //     { title: 'Cappucino', price: 14, imgUrl: Cappucino, options: ['Soy', 'Almond', 'Oat', 'Regular'] },
+    //     { title: 'Cortado', price: 14, imgUrl: Cortado, options: ['Soy', 'Almond', 'Oat', 'Regular'] },
+    //     { title: 'Espresso', price: 12, imgUrl: Espresso },
+    //     { title: 'Flat White', price: 15, imgUrl: FlatWhite, options: ['Soy', 'Almond', 'Oat', 'Regular'] },
+    //     { title: 'Latte', price: 16, imgUrl: Latte, options: ['Soy', 'Almond', 'Oat', 'Regular'] },
+    //     { title: 'Filter', price: 15, imgUrl: filter },
+    //     { title: 'Juice', price: 20, imgUrl: Juice },
+    //     { title: 'Matcha', price: 18, imgUrl: Matcha },
+    //     { title: 'V60', price: 20, imgUrl: V60 },
+    //     { title: 'Bumble', price: 20, imgUrl: Bumble },
+    //     { title: 'Esp. tonic', price: 18, imgUrl: Etonic },
+    //     { title: 'Iced latte', price: 18, imgUrl: Ilatte },
+    //     { title: 'Ice M latte', price: 18, imgUrl: Imatcha },
+    //     { title: 'Lemonade', price: 18, imgUrl: Lemonade },
+    //     { title: 'M tonic', price: 18, imgUrl: Mtonic },
+    //     { title: 'Vitamin C', price: 22, imgUrl: VC },
+    // ];
 
     const handleAddChange = (title: string, isAdded: boolean, count: number = 1, selectedOption?: string) => {
         const menuItem = menuItems.find(item => item.title === title);
