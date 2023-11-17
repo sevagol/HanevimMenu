@@ -101,11 +101,11 @@ const MenuItem: FC<ItemProps> = ({ orders, title, price, imgUrl, onAddChange }) 
                 {!isAdding ? (
                     <Button variant="contained" onClick={handleAddClick} sx={{
                         mt: 2,
-                        backgroundColor: 'white',
+                        backgroundColor: '#80723e',
                         color: 'black',
                         border: '2px solid black', // Добавляем черную рамку
                         '&:hover': {
-                          backgroundColor: 'white',
+                          backgroundColor: '#80723e',
                           borderColor: 'black', // Цвет рамки при наведении
                         },
                       }}>Add</Button>
@@ -114,7 +114,7 @@ const MenuItem: FC<ItemProps> = ({ orders, title, price, imgUrl, onAddChange }) 
                         <Grid item>
                             <IconButton size="small" onClick={handleDecrease}
                                 sx={{
-                                    backgroundColor: 'white',
+                                    backgroundColor: '#80723e',
                                     color: 'black',
                                     border: '2px solid black',
                                     borderRadius: '4px',
@@ -125,7 +125,7 @@ const MenuItem: FC<ItemProps> = ({ orders, title, price, imgUrl, onAddChange }) 
                         <Grid item>
                             <IconButton size="small" onClick={handleIncrease}
                                  sx={{
-                                    backgroundColor: 'white',
+                                    backgroundColor: '#80723e',
                                     color: 'black',
                                     border: '2px solid black',
                                     borderRadius: '4px',
