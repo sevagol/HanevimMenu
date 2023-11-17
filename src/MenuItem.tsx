@@ -96,7 +96,7 @@ const MenuItem: FC<ItemProps> = ({ orders, title, price, imgUrl, onAddChange }) 
                     {title}
                 </Typography>
                 <Typography variant="body2" color="black" sx={{ color: 'black', fontSize: '0.8rem', fontFamily:'Poppins' }}>
-                    ₪{price.toFixed(2)}
+                    {price.toFixed(2)} ₽
                 </Typography>
                 {!isAdding ? (
                     <Button variant="contained" onClick={handleAddClick} sx={{

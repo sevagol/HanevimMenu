@@ -10,19 +10,19 @@ import './font.css'
 const StyledToggleButton = styled(ToggleButton)({
     color: 'black',
     '&.Mui-selected': {
-        backgroundColor: 'black',
+        backgroundColor: '#80723e',
         color: 'white',
         border: '2px solid black',
         borderRadius: '4px',
     },
     '&.MuiToggleButton-root:active': {
-        backgroundColor: 'white',
+        backgroundColor: '#80723e',
         color: 'black',
         border: '2px solid black',
         borderRadius: '4px',
     },
     '&.MuiToggleButton-root:hover': {
-        backgroundColor: 'black',
+        backgroundColor: '#80723e',
         color: 'white',
         border: '2px solid black',
         borderRadius: '4px',
@@ -81,7 +81,7 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders, alignment, setAlignment
                 {orders.flatMap((order) =>
                     Array.from({ length: order.count }, (_, countIndex) => (
                         <li key={`${order.id}-${countIndex}`}>
-                            {order.title} - ₪{order.price.toFixed(2)}
+                            {order.title} - {order.price.toFixed(2)} ₽
                             {order.options && (
                                 <>
                                     <Button className='svg-button' onClick={(e) => handleClick(e, order.id)}>
@@ -105,7 +105,7 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders, alignment, setAlignment
                     ))
                 )}
             </ul>
-            <div className="total-price">Total: ${total.toFixed(2)}</div>
+            <div className="total-price">Total: {total.toFixed(2)} ₽</div>
             <div className="toggle-container">
                 <ToggleButtonGroup
                     value={alignment}
