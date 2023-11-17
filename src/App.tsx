@@ -3,22 +3,6 @@ import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-route
 import { useLocation } from 'react-router-dom';
 import MenuItem from './MenuItem';
 import OrdersList from './OrdersList';
-import Cappucino from './assets/CAPPUCCINO.svg';
-import Cortado from './assets/CORTADO-2.svg';
-import Espresso from './assets/ESPRESSO-2.svg';
-import FlatWhite from './assets/FLAT WHITE.svg';
-import Latte from './assets/LATTE-2.svg';
-import filter from './assets/FILTER-2.svg';
-import Juice from './assets/orange juice-2.svg';
-import Matcha from './assets/MATCHA-2.svg';
-import V60 from './assets/V 60.svg';
-import Bumble from './assets/bumble-2.svg';
-import Etonic from './assets/espresso tonic-2.svg';
-import Ilatte from './assets/ice latte-2.svg';
-import Imatcha from './assets/ice matcha latte-2.svg';
-import Lemonade from './assets/lemonade-2.svg';
-import Mtonic from './assets/matcha tonic-2.svg';
-import VC from './assets/vitamin c-2.svg'
 import './App.css';
 import WebApp from '@twa-dev/sdk';
 import { Grid } from '@mui/material';
@@ -136,22 +120,18 @@ const App = () => {
 
 
     const menuItems = [
-        { title: 'Cappucino', price: 14, imgUrl: Cappucino, options: ['Soy', 'Almond', 'Oat', 'Regular'] },
-        { title: 'Cortado', price: 14, imgUrl: Cortado, options: ['Soy', 'Almond', 'Oat', 'Regular'] },
-        { title: 'Espresso', price: 12, imgUrl: Espresso },
-        { title: 'Flat White', price: 15, imgUrl: FlatWhite, options: ['Soy', 'Almond', 'Oat', 'Regular'] },
-        { title: 'Latte', price: 16, imgUrl: Latte, options: ['Soy', 'Almond', 'Oat', 'Regular'] },
-        { title: 'Filter', price: 15, imgUrl: filter },
-        { title: 'Juice', price: 20, imgUrl: Juice },
-        { title: 'Matcha', price: 18, imgUrl: Matcha },
-        { title: 'V60', price: 20, imgUrl: V60 },
-        { title: 'Bumble', price: 20, imgUrl: Bumble },
-        { title: 'Esp. tonic', price: 18, imgUrl: Etonic },
-        { title: 'Iced latte', price: 18, imgUrl: Ilatte },
-        { title: 'Ice M latte', price: 18, imgUrl: Imatcha },
-        { title: 'Lemonade', price: 18, imgUrl: Lemonade },
-        { title: 'M tonic', price: 18, imgUrl: Mtonic },
-        { title: 'Vitamin C', price: 22, imgUrl: VC },
+        { title: 'Latte', price: 16, imgUrl: '1-removebg-preview.png', options: ['Soy', 'Almond', 'Oat', 'Regular'] },
+        { title: 'Filter', price: 15, imgUrl: '2-removebg-preview.png' },
+        { title: 'Turkish', price: 20, imgUrl: '3-removebg-preview.png' },
+        { title: 'Matcha', price: 18, imgUrl: '4-removebg-preview.png' },
+        { title: 'V60', price: 20, imgUrl: '5-removebg-preview.png' },
+        { title: 'Cruassain', price: 20, imgUrl: '6-removebg-preview.png' },
+        { title: 'Cofee beans', price: 18, imgUrl: '7-removebg-preview.png' },
+        { title: 'Chocolate', price: 18, imgUrl: '8-removebg-preview.png' },
+        { title: 'Pie', price: 18, imgUrl: '9-removebg-preview.png' },
+        { title: 'Cappucino', price: 18, imgUrl: '10-removebg-preview.png' },
+        { title: 'M tonic', price: 18, imgUrl: '11-removebg-preview.png' },
+        { title: 'Latte 2', price: 22, imgUrl: '12-removebg-preview.png' },
     ];
 
     const handleAddChange = (title: string, isAdded: boolean, count: number = 1, selectedOption?: string) => {

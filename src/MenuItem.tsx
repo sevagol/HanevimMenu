@@ -73,7 +73,7 @@ const MenuItem: FC<ItemProps> = ({ orders, title, price, imgUrl, onAddChange }) 
                 component="img"
                 sx={{
                     width: '100%', // Задайте ширину на 100% контейнера
-                    height: 200,   // Установите фиксированную высоту, например, 200px
+                    height: 150,   // Установите фиксированную высоту, например, 200px
                     objectFit: 'contain', // Указывает, как содержимое должно масштабироваться внутри контейнера
                     borderRadius: '4px',
                     fontSize: '1rem',
