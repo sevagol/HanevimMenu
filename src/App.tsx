@@ -122,7 +122,7 @@ const App = () => {
     const menuItems = [
         { title: 'Latte', price: 16, imgUrl: '1-removebg-preview.png', options: ['Soy', 'Almond', 'Oat', 'Regular'] },
         { title: 'Filter', price: 15, imgUrl: '2-removebg-preview.png' },
-        { title: 'Turkish', price: 20, imgUrl: '3-removebg-preview.png' },
+        { title: 'Turkish', price: 21, imgUrl: '3-removebg-preview.png' },
         { title: 'Matcha', price: 18, imgUrl: '4-removebg-preview.png' },
         { title: 'V60', price: 20, imgUrl: '5-removebg-preview.png' },
         { title: 'Cruassain', price: 20, imgUrl: '6-removebg-preview.png' },
