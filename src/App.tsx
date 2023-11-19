@@ -135,7 +135,7 @@ const App = () => {
         { title: 'Latte', price: 16, imgUrl: '1-removebg-preview.png', options: ['Soy', 'Almond', 'Oat', 'Regular'], category: 'Beverages' },
         { title: 'Filter', price: 15, imgUrl: '2-removebg-preview.png', category: 'Beverages' },
         { title: 'Turkish', price: 21, imgUrl: '3-removebg-preview.png', category: 'Pastries' },
-        { title: 'Matcha', price: 18, imgUrl: '4-removebg-preview.png' },
+        { title: 'Matcha', price: 18, imgUrl: '4-removebg-preview.png', category: 'Specials' },
         { title: 'V60', price: 20, imgUrl: '5-removebg-preview.png' },
         { title: 'Cruassain', price: 20, imgUrl: '6-removebg-preview.png' },
         { title: 'Cofee beans', price: 18, imgUrl: '7-removebg-preview.png' },
