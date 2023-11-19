@@ -36,6 +36,7 @@ type Order = {
     price: number;
     options?: string[];
     selectedOption?: string
+    category: string;
 };
 
 interface OrdersListProps {
@@ -43,6 +44,7 @@ interface OrdersListProps {
     alignment: 'toGo' | 'here';
     setAlignment: React.Dispatch<React.SetStateAction<'toGo' | 'here'>>;
     setOrders: React.Dispatch<React.SetStateAction<Order[]>>; // добавьте это
+    
 }
 
 

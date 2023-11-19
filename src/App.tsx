@@ -7,10 +7,12 @@ import './App.css';
 import WebApp from '@twa-dev/sdk';
 import { Grid } from '@mui/material';
 import { useCallback } from 'react';
+import { Tabs, Tab, Box } from '@mui/material';
+
 
 const MainButtonLogic: React.FC<{
     addedItemsCount: number,
-    orders: { id: string, title: string; count: number; price: number; selectedOption?: string }[],
+    orders: { id: string, title: string; count: number; price: number; selectedOption?: string, category: string }[],
     alignment: 'toGo' | 'here'
   }> = ({ addedItemsCount, orders, alignment }) => {    const location = useLocation();
     const navigate = useNavigate();
@@ -19,7 +21,7 @@ const MainButtonLogic: React.FC<{
     const TELEGRAM_TOKEN = "6958756705:AAFTQYV28jtGBu-Qa0ZkFf_6M1ZNGoX3EOg";
     const CHANNEL_ID = "-1002008195730";
 
-    const sendOrderToTelegram = (orders: { id: string; title: string; count: number; price: number; selectedOption?: string }[]) => {
+    const sendOrderToTelegram = (orders: { id: string; title: string; count: number; price: number; selectedOption?: string, category: string }[]) => {
         const orderInfo = orders.map(order => {
           let orderText = `${order.title} - ${order.count}x at ${(order.price * order.count).toFixed(2)}`;
           if (order.selectedOption) {
@@ -115,14 +117,24 @@ const MainButtonLogic: React.FC<{
 };
 const App = () => {
     const [addedItemsCount, setAddedItemsCount] = useState(0);
-    const [orders, setOrders] = useState<{ id: string, title: string; count: number; price: number; options?: string[], selectedOption?: string }[]>([]);
+    const [orders, setOrders] = useState<{ id: string, title: string; count: number; price: number; options?: string[], selectedOption?: string, category: string }[]>([]);
     const [alignment, setAlignment] = useState<'toGo' | 'here'>('here');
+
+    const [activeTab, setActiveTab] = useState(0);
+
+    const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
+        setActiveTab(newValue);
+    };
+    
+    
+
+    const categories = ['Beverages', 'Pastries', 'Specials'];
 
 
     const menuItems = [
-        { title: 'Latte', price: 16, imgUrl: '1-removebg-preview.png', options: ['Soy', 'Almond', 'Oat', 'Regular'] },
-        { title: 'Filter', price: 15, imgUrl: '2-removebg-preview.png' },
-        { title: 'Turkish', price: 21, imgUrl: '3-removebg-preview.png' },
+        { title: 'Latte', price: 16, imgUrl: '1-removebg-preview.png', options: ['Soy', 'Almond', 'Oat', 'Regular'], category: 'Beverages' },
+        { title: 'Filter', price: 15, imgUrl: '2-removebg-preview.png', category: 'Beverages' },
+        { title: 'Turkish', price: 21, imgUrl: '3-removebg-preview.png', category: 'Pastries' },
         { title: 'Matcha', price: 18, imgUrl: '4-removebg-preview.png' },
         { title: 'V60', price: 20, imgUrl: '5-removebg-preview.png' },
         { title: 'Cruassain', price: 20, imgUrl: '6-removebg-preview.png' },
@@ -149,6 +161,7 @@ const App = () => {
                     price: menuItem?.price || 0,
                     options: menuItem?.options,
                     selectedOption,
+                    category: menuItem?.category || ''
                 };
                 return [...prevOrders, newOrder]; // Добавляем новый заказ в массив
             } else {
@@ -180,16 +193,23 @@ const App = () => {
     
     
 
+    
     return (
-        
         <Router>
             <MainButtonLogic addedItemsCount={addedItemsCount} orders={orders} alignment={alignment} />
+            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                <Tabs value={activeTab} onChange={handleTabChange} variant="fullWidth">
+                    {categories.map((category, index) => (
+                        <Tab label={category} key={index} />
+                    ))}
+                </Tabs>
+            </Box>
             <Routes>
-            <Route path="/orders" element={<OrdersList orders={orders} alignment={alignment} setAlignment={setAlignment} setOrders={setOrders}/>} />
+                <Route path="/orders" element={<OrdersList orders={orders} alignment={alignment} setAlignment={setAlignment} setOrders={setOrders}/>} />
                 <Route path="/" element={
                     <div className="menu-container">
                         <Grid container spacing={0.5}>
-                            {menuItems.map((item, index) => (
+                        {menuItems.filter(item => item.category === categories[activeTab]).map((item, index) => (
                                 <Grid item xs={4} sm={4} md={4} key={index}>
                                     <MenuItem {...item} key={index} onAddChange={handleAddChange} orders={orders} />
                                 </Grid>
