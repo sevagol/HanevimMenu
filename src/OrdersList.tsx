@@ -74,6 +74,13 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders, alignment, setAlignment
         setSelectedId(null);
     };
 
+    const [name, setName] = useState('');
+
+    // Handler for name input change
+    const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setName(event.target.value);
+    };
+
     return (
         <div className="orders-container">
             <h2>Your Orders:</h2>
@@ -121,6 +128,14 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders, alignment, setAlignment
                         here
                     </StyledToggleButton>
                 </ToggleButtonGroup>
+                <div className="name-input-container">
+                <input
+                    type="text"
+                    value={name}
+                    onChange={handleNameChange}
+                    placeholder="Enter your name"
+                />
+            </div>
             </div>
         </div>
     );
