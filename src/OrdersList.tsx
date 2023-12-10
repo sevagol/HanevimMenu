@@ -128,14 +128,14 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders, alignment, setAlignment
                         here
                     </StyledToggleButton>
                 </ToggleButtonGroup>
-                <div className="name-input-container">
+            </div>
+            <div className="name-input-container">
                 <input
                     type="text"
                     value={name}
                     onChange={handleNameChange}
                     placeholder="Enter your name"
                 />
-            </div>
             </div>
         </div>
     );
