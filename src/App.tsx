@@ -52,7 +52,7 @@ const MainButtonLogic: React.FC<{
     // const CHANNEL_ID = "-1002008195730";
     const apiUrl = "https://allpay.to/app/?show=getpayment&mode=api2";
   
-    const api_login = "YOUR_API_LOGIN";
+    const api_login = "pp1002467";
     
     // Явно указываем тип params и добавляем поле 'sign'
     let params: ApiParams;
@@ -70,7 +70,7 @@ params = {
   'sign': '', // Временное значение, пока не будет вычислена подпись
 };
 
-const signature = await getApiSignature(params, "YOUR_API_KEY");
+const signature = await getApiSignature(params, "C62B7D2FDA8F1C9B6281DD5D36C123BD");
 params['sign'] = signature;
 
   
