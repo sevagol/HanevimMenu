@@ -134,7 +134,8 @@ params['sign'] = signature;
     } else if (location.pathname === "/orders") {
       WebApp.showConfirm("Do you want to place an order?", (confirmed) => {
         if (confirmed) {
-          sendOrderToTelegram(orders);
+            // sendOrderToTelegram(orders);
+          sendOrderToTelegram();
           alert("Your order has been placed!");
           WebApp.close();
         }
