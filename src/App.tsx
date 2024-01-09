@@ -8,6 +8,7 @@ import { Grid } from '@mui/material';
 import { getFirestore } from "firebase/firestore";
 import { collection, getDocs } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
+import PaymentPage from './PaymentPage';
 
 interface ApiParams {
     name: string;
@@ -252,6 +253,7 @@ const App = () => {
     <Router>
       <MainButtonLogic addedItemsCount={addedItemsCount} orders={orders} alignment={alignment} />
       <Routes>
+      <Route path="/payment" element={<PaymentPage orders={orders} />} /> {/* Добавьте новый маршрут */}
         <Route path="/orders" element={<OrdersList orders={orders} alignment={alignment} setAlignment={setAlignment} setOrders={setOrders} />} />
         <Route path="/" element={
           <div className="menu-container">
